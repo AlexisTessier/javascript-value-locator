@@ -1,0 +1,63 @@
+{
+  "name": "node-module-locator",
+  "version": "1.0.0",
+  "description": "Load node_modules and json files from multiples sources and multiple protocols",
+  "main": "index.js",
+  "watch": {
+    "lint": "./sources"
+  },
+  "scripts": {
+    "lint": "eslint --ext js ./sources",
+    "watch:lint": "npm-watch",
+    "show-coverage": "npm run coverage && here -d -w ./",
+    "extra-dep": "dependency-check ./package.json --extra",
+    "check-dependencies": "dependency-check ./package.json",
+    "test": "npm run lint && npm run check-dependencies && npm run coverage",
+    "coverage": "nyc ava --timeout=5000 && npm run report",
+    "watch:test": "ava --watch --timeout=5000",
+    "report": "nyc report --reporter=html",
+    "dev": "concurrently \"ttab npm run show-coverage\" \"ttab node update-coverage\" \"ttab npm run watch:test\" \"ttab npm run watch:lint\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://AlexisTessier@bitbucket.org/AlexisTessier/node-module-locator.git"
+  },
+  "keywords": [
+    "node",
+    "module",
+    "locator",
+    "config",
+    "async",
+    "require"
+  ],
+  "author": "Alexis Tessier",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/AlexisTessier/node-module-locator#readme",
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "concurrently": "^3.4.0",
+    "coveralls": "^2.12.0",
+    "dependency-check": "^2.8.0",
+    "eslint": "^3.18.0",
+    "npm-watch": "^0.1.8",
+    "nyc": "^10.2.0",
+    "serve-here": "^3.2.0",
+    "shelljs": "^0.7.7",
+    "ttab": "^0.5.1",
+    "glob": "^7.1.1"
+  },
+  "ava": {
+    "source": [
+      "sources/**/*.js"
+    ]
+  },
+  "nyc": {
+    "exclude": [
+      "tests/**/*.js",
+      "**/node_modules/*"
+    ]
+  },
+  "dependencies": {
+    "better-assert": "^1.0.2"
+  }
+}
