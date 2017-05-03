@@ -20,7 +20,8 @@ test('module api', t => {
 
 	const expectedApiKeys = [
 		'load',
-		'parse'
+		'parse',
+		'defaultProtocols'
 	];
 
 	const apiKeys = Object.keys(nodeModuleLocator);
@@ -29,9 +30,11 @@ test('module api', t => {
 		assert(apiKeys.includes(expectedKey), `Expected api key "${expectedKey}"" is missing`)
 	});
 
-	apiKeys.forEach(expectedKey => {
-		assert(expectedApiKeys.includes(expectedKey), `Unexpected api key "${expectedKey}" founded`)
+	apiKeys.forEach(key => {
+		assert(expectedApiKeys.includes(key), `Unexpected api key "${key}" founded`)
 	});
 
 	assert.equal(nodeModuleLocator.load, requireFromIndex('sources/api/load'));
+	assert.equal(nodeModuleLocator.parse, requireFromIndex('sources/api/parse'));
+	assert(Object.is(nodeModuleLocator.defaultProtocols, requireFromIndex('sources/api/default-protocols')));
 });

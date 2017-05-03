@@ -4,7 +4,7 @@ const assert = require('better-assert');
 
 const UNDEFINED_MODULE = Symbol();
 
-module.exports = function requireProtocol(resolve, reject, moduleName, options = {}) {
+module.exports = function requireProtocol(resolve, reject, moduleName, options = {}) { // eslint-disable-line max-params
 	assert(typeof resolve === 'function');
 	assert(typeof reject === 'function');
 	assert(typeof moduleName === 'string');

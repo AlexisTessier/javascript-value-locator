@@ -3,7 +3,7 @@
 const assert = require('better-assert');
 
 const parseJOL = require('./parse');
-const defaultProtocols = require('../default-protocols');
+const defaultProtocols = require('./default-protocols');
 
 /**
  * This function loads a module in a async way
@@ -15,7 +15,7 @@ const defaultProtocols = require('../default-protocols');
  *
  * @return {Promise} A promise resolving the javascript object targeted by the locator.
  */
-module.exports = function load(locator, options = {}, {
+module.exports = function load(locator, options = {}, { // eslint-disable-line max-params
 	protocols = defaultProtocols
 } = {}) {
 	assert((locator && typeof locator === 'object') || typeof locator === 'string');
@@ -66,7 +66,6 @@ module.exports = function load(locator, options = {}, {
 
 			default:
 				throw new TypeError(`${typeof locator.protocol} is not a valid type for a locator.protocol. Valid types are function or string`);
-				break;
 		}
 	}
 

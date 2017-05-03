@@ -102,7 +102,35 @@ test('load using protocol name and protocols list in the locator object', t => {
 	});
 })
 
-test.todo('check protocols override');
+test('check protocols override', t => {
+	const load = requireFromIndex('sources/api/load');
+
+	function fakeProtocol(resolve, reject, moduleName) {
+		resolve(`fakeProtocol--${moduleName}`)
+	}
+
+	const loadPromise = load({
+		protocol: 'fakeProtocol',
+		target: 'fake-module',
+		protocols: {
+			fakeProtocol
+		}
+	}, null, {
+		protocols: {
+			fakeProtocol: (resolve, reject, moduleName) => {
+				resolve(`not-fakeProtocol--${moduleName}`)
+			}
+		}
+	});
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(moduleContent => {
+		assert.equal(moduleContent, `fakeProtocol--fake-module`);
+		t.pass();
+	});
+});
 
 test('passing a wrong type for protocol throws error', t => {
 	const load = requireFromIndex('sources/api/load');
@@ -172,7 +200,33 @@ test('passing options to a protocol directly in the locator object', t => {
 	});
 })
 
-test.todo('check options override');
+test('check options override', t => {
+	const load = requireFromIndex('sources/api/load');
+
+	const expectedOptions = {
+		fakeKey: 'fakeValue'
+	};
+	let passedOptions = null;
+
+	const loadPromise = load({
+		protocol(resolve, reject, moduleName, options) {
+			passedOptions = options;
+			resolve(`fake-protocol--${moduleName}`);
+		},
+		target: 'fake-module',
+		options: expectedOptions
+	}, {
+		fakeKey: 'not-fakeValue'
+	});
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(moduleContent => {
+		assert.deepEqual(passedOptions, expectedOptions);
+		t.pass();
+	});
+});
 
 test('load using undefined protocol', t => {
 	const load = requireFromIndex('sources/api/load');
