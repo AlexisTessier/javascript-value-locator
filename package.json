@@ -1,22 +1,25 @@
 {
-  "name": "node-module-locator",
+  "name": "javascript-object-locator",
   "version": "1.0.0",
-  "description": "Load node_modules and json files from multiples sources and multiple protocols",
+  "description": "Load node modules or javascript object or json files from multiples sources and using multiple protocols",
   "main": "index.js",
   "watch": {
     "lint": "./sources"
   },
   "scripts": {
     "lint": "eslint --ext js ./sources",
-    "watch:lint": "npm-watch",
-    "show-coverage": "npm run coverage && here -d -w ./",
+    "watch-lint": "npm-watch",
     "extra-dep": "dependency-check ./package.json --extra",
     "check-dependencies": "dependency-check ./package.json",
     "test": "npm run lint && npm run check-dependencies && npm run coverage",
-    "coverage": "nyc ava --timeout=5000 && npm run report",
-    "watch:test": "ava --watch --timeout=5000",
+    "watch-test": "ava --watch --timeout=30000",
+    "coverage": "nyc ava --timeout=30000 && npm run report",
+    "show-coverage": "npm run coverage && here -d -w ./",
+    "documentation": "rm -f README.md && mustache package.json README.tpl.md > README.md && documentation readme index.js -s Documentation",
     "report": "nyc report --reporter=html",
-    "dev": "concurrently \"ttab npm run show-coverage\" \"ttab node update-coverage\" \"ttab npm run watch:test\" \"ttab npm run watch:lint\""
+    "build": "npm run documentation",
+    "dev": "concurrently \"ttab npm run documentation\" \"ttab npm run show-coverage\" \"ttab node update-coverage\" \"ttab npm run watch-test\" \"ttab npm run watch-lint\"",
+    "pre-publish": "npm run build && npm test"
   },
   "repository": {
     "type": "git",
@@ -38,13 +41,15 @@
     "concurrently": "^3.4.0",
     "coveralls": "^2.12.0",
     "dependency-check": "^2.8.0",
+    "documentation": "^4.0.0-rc.1",
     "eslint": "^3.18.0",
+    "glob": "^7.1.1",
+    "mustache": "^2.3.0",
     "npm-watch": "^0.1.8",
     "nyc": "^10.2.0",
     "serve-here": "^3.2.0",
     "shelljs": "^0.7.7",
-    "ttab": "^0.5.1",
-    "glob": "^7.1.1"
+    "ttab": "^0.5.1"
   },
   "ava": {
     "source": [

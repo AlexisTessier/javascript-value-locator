@@ -11,15 +11,16 @@ test('module api', t => {
 	assert.equal(pkg.main, 'index.js');
 
 	const index = requireFromIndex('index');
-	const nodeModuleLocator = requireFromIndex('sources/node-module-locator');
+	const nodeModuleLocator = requireFromIndex('sources/javascript-object-locator');
 
-	assert(Object.is(index, nodeModuleLocator), `The main module of the package must exports the module sources/node-module-locator`);
+	assert(Object.is(index, nodeModuleLocator), `The main module of the package must exports the module sources/javascript-object-locator`);
 
 	assert.equal(typeof nodeModuleLocator, 'object');
 	assert(nodeModuleLocator !== null);
 
 	const expectedApiKeys = [
-		'load'
+		'load',
+		'parse'
 	];
 
 	const apiKeys = Object.keys(nodeModuleLocator);

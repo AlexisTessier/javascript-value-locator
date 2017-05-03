@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./sources/node-module-locator');
+module.exports = require('./sources/javascript-object-locator');

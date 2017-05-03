@@ -5,7 +5,7 @@ module.exports = {
     },
     "rules": {
         "strict": ["error", "global"],
-        "indent": ["error", "tab"],
+        "indent": ["error", "tab", {"SwitchCase": 1}],
         "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
         "func-style": ["error", "declaration", {
             "allowArrowFunctions": true
