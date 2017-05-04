@@ -5,36 +5,38 @@ const test = require('ava');
 
 const requireFromIndex = require('../utils/require-from-index');
 
-test('module api', t => {
+test('api', t => {
 	const pkg = requireFromIndex('package.json');
 
 	assert.equal(pkg.main, 'index.js');
 
 	const index = requireFromIndex('index');
-	const nodeModuleLocator = requireFromIndex('sources/javascript-object-locator');
+	const api = requireFromIndex('sources/javascript-object-locator');
 
-	assert(Object.is(index, nodeModuleLocator), `The main module of the package must exports the module sources/javascript-object-locator`);
+	assert(Object.is(index, api), `The main module of the package must exports the module sources/javascript-object-locator`);
 
-	assert.equal(typeof nodeModuleLocator, 'object');
-	assert(nodeModuleLocator !== null);
+	assert.equal(typeof api, 'object');
+	assert(api !== null);
 
 	const expectedApiKeys = [
 		'load',
 		'parse',
+		'stringify',
 		'defaultProtocols'
 	];
 
-	const apiKeys = Object.keys(nodeModuleLocator);
+	const apiKeys = Object.keys(api);
 
 	expectedApiKeys.forEach(expectedKey => {
-		assert(apiKeys.includes(expectedKey), `Expected api key "${expectedKey}"" is missing`)
+		assert(apiKeys.includes(expectedKey), `Expected api key "${expectedKey}" is missing`)
 	});
 
 	apiKeys.forEach(key => {
 		assert(expectedApiKeys.includes(key), `Unexpected api key "${key}" founded`)
 	});
 
-	assert.equal(nodeModuleLocator.load, requireFromIndex('sources/api/load'));
-	assert.equal(nodeModuleLocator.parse, requireFromIndex('sources/api/parse'));
-	assert(Object.is(nodeModuleLocator.defaultProtocols, requireFromIndex('sources/api/default-protocols')));
+	assert.equal(api.load, requireFromIndex('sources/api/load'));
+	assert.equal(api.parse, requireFromIndex('sources/api/parse'));
+	assert.equal(api.stringify, requireFromIndex('sources/api/stringify'));
+	assert(Object.is(api.defaultProtocols, requireFromIndex('sources/api/default-protocols')));
 });

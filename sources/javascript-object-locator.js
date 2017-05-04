@@ -3,6 +3,6 @@
 module.exports = {
 	load: require('./api/load'),
 	parse: require('./api/parse'),
+	stringify: require('./api/stringify'),
 	defaultProtocols: require('./api/default-protocols')
-	// stringify: require('./api/stringify') 
 };

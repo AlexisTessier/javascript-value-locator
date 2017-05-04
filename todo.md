@@ -1,8 +1,8 @@
-+ Add stringify method to the API
 + Add tests on require protocol
 + Add tests on parse method
 + Add documentation
 + Better automation of the documentation generation
++ scope the package
 + Add some badges to the top of the documentation
 	+ version
 	+ npm version
@@ -15,6 +15,7 @@
 + fix the more than probable badges issues
 + Open a waffle.io board
 + move next task to the waffle board and start using the module in other project to ensure concept validity
++ Add optional username handling
 + Add some examples in documentation
 + Add some default protocols
 + look for semantic realease
