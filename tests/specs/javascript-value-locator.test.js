@@ -11,9 +11,9 @@ test('api', t => {
 	assert.equal(pkg.main, 'index.js');
 
 	const index = requireFromIndex('index');
-	const api = requireFromIndex('sources/javascript-object-locator');
+	const api = requireFromIndex('sources/javascript-value-locator');
 
-	assert(Object.is(index, api), `The main module of the package must exports the module sources/javascript-object-locator`);
+	assert(Object.is(index, api), `The main module of the package must exports the module sources/javascript-value-locator`);
 
 	assert.equal(typeof api, 'object');
 	assert(api !== null);

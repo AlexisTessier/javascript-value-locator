@@ -1,6 +1,6 @@
-# Javascript Object Locator
+# Javascript Value Locator
 
-Load node modules or javascript object or json files from multiples sources and using multiple protocols
+Load javascript values from multiples sources and using multiple protocols
 
 ## Documentation
 
@@ -12,9 +12,9 @@ This function loads a module in a async way
 
 **Parameters**
 
--   `locator` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object))** A javascript object locator as an object or a string which follow the JOL format.
+-   `locator` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object))** A javascript value locator as an object or a string which follow the JVL format.
 -   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** The javascript options object which will be passed to the locator protocol function. If locator is an object, it can provide directly an options object which will be merged with the options parameter. (optional, default `{}`)
 -   `inject` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** A javascript object containing the load function dependencies. (optional, default `{}`)
     -   `inject.protocols`  A Dictionnary where keys are the names of the protocols and value are the protocols functions. If locator is an object, it can provide directly a protocols key which will be merged with the inject.protocols parameter. (optional, default `defaultProtocols`)
 
-Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)** A promise resolving the javascript object targeted by the locator.
+Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)** A promise resolving the javascript value targeted by the locator.

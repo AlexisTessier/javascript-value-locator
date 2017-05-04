@@ -12,7 +12,7 @@ test('settings', t => {
 	assert(settings);
 
 	const expectedSettingsKeys = [
-		'JOLStringProtocolTargetSeparator'
+		'JVLStringProtocolTargetSeparator'
 	];
 
 	const settingsKeys = Object.keys(settings);
@@ -25,5 +25,5 @@ test('settings', t => {
 		assert(expectedSettingsKeys.includes(key), `Unexpected setting "${key}" founded`)
 	});
 
-	assert.equal(settings.JOLStringProtocolTargetSeparator, ':');
+	assert.equal(settings.JVLStringProtocolTargetSeparator, ':');
 });

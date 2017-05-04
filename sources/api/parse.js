@@ -2,19 +2,19 @@
 
 const assert = require('better-assert');
 
-const JOLStringProtocolTargetSeparator = require('../settings').JOLStringProtocolTargetSeparator;
+const JVLStringProtocolTargetSeparator = require('../settings').JVLStringProtocolTargetSeparator;
 
-module.exports = function parse(JOL) {
-	assert(typeof JOL === 'string');
+module.exports = function parse(JVL) {
+	assert(typeof JVL === 'string');
 
-	const separatorIndex = JOL.indexOf(JOLStringProtocolTargetSeparator);
+	const separatorIndex = JVL.indexOf(JVLStringProtocolTargetSeparator);
 
-	if (separatorIndex < 0 || JOL.length < (2 + JOLStringProtocolTargetSeparator.length)) {
-		throw new Error(`"${JOL}" is not a valid Javascript Object Locator string. It must contains the seperator sign "${JOLStringProtocolTargetSeparator}" between a protocol name and a target name`);
+	if (separatorIndex < 0 || JVL.length < (2 + JVLStringProtocolTargetSeparator.length)) {
+		throw new Error(`"${JVL}" is not a valid Javascript Value Locator string. It must contains the seperator sign "${JVLStringProtocolTargetSeparator}" between a protocol name and a target name`);
 	}
 
 	return {
-		protocol: JOL.substring(0, separatorIndex),
-		target: JOL.substring(separatorIndex+1)
+		protocol: JVL.substring(0, separatorIndex),
+		target: JVL.substring(separatorIndex+1)
 	}
 }

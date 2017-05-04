@@ -10,8 +10,10 @@ const requireFromIndex = require('../../utils/require-from-index');
 
 test('type of load', t => {
 	const load = requireFromIndex('sources/api/load');
+	const loadFromIndex = requireFromIndex('load');
 
 	assert.equal(typeof load, 'function');
+	assert.equal(loadFromIndex, load);
 })
 
 test('load using locator object', t => {

@@ -10,41 +10,43 @@ const requireFromIndex = require('../../utils/require-from-index');
 
 test('type of stringify', t => {
 	const stringify = requireFromIndex('sources/api/stringify');
+	const stringifyFromIndex = requireFromIndex('stringify');
 
 	assert.equal(typeof stringify, 'function');
+	assert.equal(stringifyFromIndex, stringify);
 })
 
 test('stringify an object', t => {
 	const stringify = requireFromIndex('sources/api/stringify');
-	const separator = requireFromIndex('sources/settings').JOLStringProtocolTargetSeparator;
+	const separator = requireFromIndex('sources/settings').JVLStringProtocolTargetSeparator;
 
 	const locator = {
 		protocol: 'fake-protocol',
 		target: 'fake-target'
 	};
 
-	const JOLString = stringify(locator);
+	const JVLString = stringify(locator);
 
-	assert.equal(JOLString, `fake-protocol${separator}fake-target`);
+	assert.equal(JVLString, `fake-protocol${separator}fake-target`);
 });
 
 test('stringify an object with not trimed protocol or target', t => {
 	const stringify = requireFromIndex('sources/api/stringify');
-	const separator = requireFromIndex('sources/settings').JOLStringProtocolTargetSeparator;
+	const separator = requireFromIndex('sources/settings').JVLStringProtocolTargetSeparator;
 
 	const locator = {
 		protocol: '  fake-protocol  ',
 		target: '  fake-target '
 	};
 
-	const JOLString = stringify(locator);
+	const JVLString = stringify(locator);
 
-	assert.equal(JOLString, `fake-protocol${separator}fake-target`);
+	assert.equal(JVLString, `fake-protocol${separator}fake-target`);
 });
 
 test('stringify with an unvalid protocol which contains the separator in is name', t => {
 	const stringify = requireFromIndex('sources/api/stringify');
-	const separator = requireFromIndex('sources/settings').JOLStringProtocolTargetSeparator;
+	const separator = requireFromIndex('sources/settings').JVLStringProtocolTargetSeparator;
 
 	const locator = {
 		protocol: `fake-pr${separator}otocol`,

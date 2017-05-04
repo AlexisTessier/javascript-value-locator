@@ -1,29 +1,31 @@
 {
-  "name": "javascript-object-locator",
+  "name": "javascript-value-locator",
   "version": "1.0.0",
-  "description": "Load node modules or javascript object or json files from multiples sources and using multiple protocols",
+  "description": "Load javascript values from multiples sources and using multiple protocols",
   "main": "index.js",
   "watch": {
-    "lint": "./sources"
+    "lint": "./sources",
+    "build": "./sources"
   },
   "scripts": {
     "lint": "eslint --ext js ./sources",
-    "watch-lint": "npm-watch",
+    "watch": "npm-watch",
     "extra-dep": "dependency-check ./package.json --extra",
     "check-dependencies": "dependency-check ./package.json",
     "test": "npm run lint && npm run check-dependencies && npm run coverage",
     "watch-test": "ava --watch --timeout=30000",
     "coverage": "nyc ava --timeout=30000 && npm run report",
     "show-coverage": "npm run coverage && here -d -w ./",
-    "documentation": "rm -f README.md && mustache package.json README.tpl.md > README.md && documentation readme index.js -s Documentation",
+    "entries": "node build/generate-entries",
+    "documentation": "rm -f README.md && node build/generate-readme.view.js && mustache build/tmp/readme.view.json build/readme.tpl.md > README.md && documentation readme index.js -s Documentation && rm -f build/tmp/readme.view.json",
     "report": "nyc report --reporter=html",
-    "build": "npm run documentation",
-    "dev": "concurrently \"ttab npm run documentation\" \"ttab npm run show-coverage\" \"ttab node update-coverage\" \"ttab npm run watch-test\" \"ttab npm run watch-lint\"",
+    "build": "npm run entries && npm run documentation",
+    "dev": "concurrently \"ttab npm run show-coverage\" \"ttab node build/update-coverage\" \"ttab npm run watch-test\" \"ttab npm run watch\"",
     "pre-publish": "npm run build && npm test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://AlexisTessier@bitbucket.org/AlexisTessier/node-module-locator.git"
+    "url": "git+https://AlexisTessier@bitbucket.org/AlexisTessier/javascript-value-locator.git"
   },
   "keywords": [
     "node",
@@ -35,20 +37,23 @@
   ],
   "author": "Alexis Tessier",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/AlexisTessier/node-module-locator#readme",
+  "homepage": "https://bitbucket.org/AlexisTessier/javascript-value-locator#readme",
   "devDependencies": {
     "ava": "^0.18.2",
+    "capitalize": "^1.0.0",
     "concurrently": "^3.4.0",
     "coveralls": "^2.12.0",
     "dependency-check": "^2.8.0",
     "documentation": "^4.0.0-rc.1",
     "eslint": "^3.18.0",
     "glob": "^7.1.1",
+    "jsonfile": "^3.0.0",
+    "markdown": "^0.5.0",
+    "mkdirp": "^0.5.1",
     "mustache": "^2.3.0",
     "npm-watch": "^0.1.8",
     "nyc": "^10.2.0",
     "serve-here": "^3.2.0",
-    "shelljs": "^0.7.7",
     "ttab": "^0.5.1"
   },
   "ava": {

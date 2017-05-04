@@ -7,9 +7,12 @@ const requireFromIndex = require('../../utils/require-from-index');
 
 test('default protocols', t => {
 	const defaultProtocols = requireFromIndex('sources/api/default-protocols');
+	const defaultProtocolsFromIndex = requireFromIndex('default-protocols');
 
 	assert.equal(typeof defaultProtocols, 'object');
 	assert(defaultProtocols !== null);
+
+	assert(Object.is(defaultProtocolsFromIndex, defaultProtocols));
 
 	const expectedProtocols = [
 		'require'
