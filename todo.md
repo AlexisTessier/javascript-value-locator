@@ -1,7 +1,7 @@
-+ Add tests on parse method
 + Add tests on require protocol
 + Add documentation on functions
 + scope the package
++ Add introduction on the README
 + Add some badges to the top of the documentation
 	+ version
 	+ npm version
@@ -9,17 +9,15 @@
 	+ build status (travis.ci)
 	+ code coverage (coveralls)
 	+ dependencies status (david)
-+ Add introduction on the README
+	+ look for semantic realease
 + publish on NPM then on Github
 + fix the more than probable badges issues
 + Open a waffle.io board
 + move next tasks to the waffle board and start using the module in other project to ensure concept validity
++ Use pegjs to create a real parser
++ Handle computed terms 
 + Add optional username handling
++ Add optional options in jvl
 + Add some examples in documentation
 + Add some default protocols
-+ look for semantic realease
 + look for documentation coverage
-+ protocol could be a promise resolving a protocol function
-+ protocol could be a JOL formated string
-+ options could be a promise resolving an option object
-+ options could be a JOL formated string

@@ -1,0 +1,5 @@
+#define config json-property:path/to/target.json#
+(config?property=username)
+@(config?property=protocol)
+:(config?property=server)
+?(config?property=options)

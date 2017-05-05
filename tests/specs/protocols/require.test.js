@@ -5,5 +5,6 @@ const test = require('ava');
 
 const requireFromIndex = require('../../utils/require-from-index');
 
-test.skip('default protocol require', t => {
+test.skip('require valid target', t => {
+	
 });
