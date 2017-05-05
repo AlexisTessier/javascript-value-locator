@@ -6,12 +6,12 @@ const parseJVL = require('./parse');
 const defaultProtocols = require('./default-protocols');
 
 /**
- * This function loads a module in a async way
+ * This function loads a javascript value in a async way 
  *
- * @param {String | Object} locator - A javascript value locator as an object or a string which follow the JVL format.
- * @param {Object} [options=] - The javascript options object which will be passed to the locator protocol function. If locator is an object, it can provide directly an options object which will be merged with the options parameter.
- * @param {Object} [inject=] - A javascript object containing the load function dependencies.
- * @param [inject.protocols=defaultProtocols] - A Dictionnary where keys are the names of the protocols and value are the protocols functions. If locator is an object, it can provide directly a protocols key which will be merged with the inject.protocols parameter.
+ * @param {JavascriptValueLocator} locator - A javascript value locator as an object or a string which follow the JVL format.
+ * @param {object} [options=] - The javascript options object which will be passed to the locator protocol function. If locator is an object, it can provide directly an options object which will be merged with the options parameter.
+ * @param {object} [inject=] - A javascript object containing the load function dependencies.
+ * @param {object} [inject.protocols=defaultProtocols] - A Dictionnary where keys are the names of the protocols and value are the protocols functions. If locator is an object, it can provide directly a protocols key which will be merged with the inject.protocols parameter.
  *
  * @return {Promise} A promise resolving the javascript value targeted by the locator.
  */

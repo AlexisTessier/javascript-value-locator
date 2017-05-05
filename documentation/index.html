@@ -1,0 +1,461 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>javascript-value-locator 1.0.0 | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
+  <link href='assets/style.css' type='text/css' rel='stylesheet' />
+  <link href='assets/github.css' type='text/css' rel='stylesheet' />
+</head>
+<body class='documentation'>
+  <div class='max-width-4 mx-auto'>
+    <div class='clearfix md-mxn2'>
+      <div class='fixed xs-hide fix-3 overflow-auto max-height-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>javascript-value-locator</h3>
+          <div class='mb1'><code>1.0.0</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#javascriptvaluelocator'
+                  class="">
+                  JavascriptValueLocator
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#javascriptvaluelocatorstring'
+                  class="">
+                  JavascriptValueLocatorString
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#javascriptvaluelocatorobject'
+                  class="">
+                  JavascriptValueLocatorObject
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#javascript-value-locator'
+                  class="">
+                  javascript-value-locator
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#load'
+                  class="">
+                  load
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class='fix-margin-3'>
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+          <a href="https://bitbucket.org/AlexisTessier/javascript-value-locator#readme" target="_blank">Before anything else, go read the Readme</a>
+        </section>
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='javascriptvaluelocator'>
+      JavascriptValueLocator
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>A JavascriptValueLocator (JVL) is a <a href="#javascriptvaluelocatorstring">string</a> or an <a href="#javascriptvaluelocatorobject">object</a> which describe a way to access to a javascript value.
+It must provide at least:</p>
+<ul>
+<li><a href="JavascriptValueLocatorProtocol">A protocol (JavascriptValueLocatorProtocol)</a></li>
+<li><a href="JavascriptValueLocatorTarget">A target (JavascriptValueLocatorTarget)</a></li>
+</ul>
+
+  
+  
+  
+    <p>
+      Type:
+      (<a href="#javascriptvaluelocatorstring">JavascriptValueLocatorString</a> | <a href="#javascriptvaluelocatorobject">JavascriptValueLocatorObject</a>)
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='javascriptvaluelocatorstring'>
+      JavascriptValueLocatorString
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>A JavascriptValueLocatorString (JVL string) is a string which describe a way to access to a javascript value. It must matches the following format:</p>
+<ul>
+<li>protocol-name:target-name <a href="#javascriptvaluelocator">see JavascriptValueLocator</a></li>
+</ul>
+
+  
+  
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// Those are valid JVL strings</span>
+<span class="hljs-string">"require:/path/to/file"</span>
+<span class="hljs-string">"any-defined-protocol-name:any-target-name_case is-NotImportant"</span>
+
+<span class="hljs-comment">// Those are unvalid JVL strings</span>
+<span class="hljs-string">":target-name"</span> <span class="hljs-comment">// Missing protocol</span>
+<span class="hljs-string">"protocol-name"</span> <span class="hljs-comment">// Missing target</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='javascriptvaluelocatorobject'>
+      JavascriptValueLocatorObject
+    </h3>
+    
+    
+  </div>
+  
+
+  
+  
+  
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Properties</div>
+    <div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>protocol</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | JavascriptValueLocatorProtocol))</code>
+          
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <span class='code bold'>target</span> <code class='quiet'>(JavascriptValueLocatorTarget)</code>
+          
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='javascript-value-locator'>
+      javascript-value-locator
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>The JVL API is an object providing the following properties:</p>
+<ul>
+<li><a href="#load">load</a></li>
+<li><a href="parse">parse</a></li>
+<li><a href="stringify">stringify</a></li>
+<li><a href="defaultProtocols">defaultProtocols</a></li>
+</ul>
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// require the public API</span>
+<span class="hljs-keyword">const</span> JVL = <span class="hljs-built_in">require</span>(<span class="hljs-string">'javascript-value-locator'</span>)
+<span class="hljs-comment">// then use a method of the API</span>
+JVL.load(<span class="hljs-string">'npm:string-humanize@1.0.0'</span>).then(<span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(_(<span class="hljs-string">'hello-world'</span>))) <span class="hljs-comment">// Hello world</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='load'>
+      load
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function loads a javascript value in a async way</p>
+
+  
+  
+  <div class='pre p1 fill-light mt0'>load(locator: <a href="#javascriptvaluelocator">JavascriptValueLocator</a>, options: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?, inject: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>locator</span> <code class='quiet'>(<a href="#javascriptvaluelocator">JavascriptValueLocator</a>)</code>
+	    A javascript value locator as an object or a string which follow the JVL format.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?
+            = <code>{}</code>)</code>
+	    The javascript options object which will be passed to the locator protocol function. If locator is an object, it can provide directly an options object which will be merged with the options parameter.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>inject</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?
+            = <code>{}</code>)</code>
+	    A javascript object containing the load function dependencies.
+
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>inject.protocols</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></code>
+                  
+                    (default <code>defaultProtocols</code>)
+                  </td>
+                  <td class='break-word'><span>A Dictionnary where keys are the names of the protocols and value are the protocols functions. If locator is an object, it can provide directly a protocols key which will be merged with the inject.protocols parameter.
+</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
+        A promise resolving the javascript value targeted by the locator.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>

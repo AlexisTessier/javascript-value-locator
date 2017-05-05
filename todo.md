@@ -1,4 +1,3 @@
-+ Add tests on require protocol
 + Add documentation on functions
 + scope the package
 + Add introduction on the README
