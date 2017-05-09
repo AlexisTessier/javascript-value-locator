@@ -33,6 +33,16 @@ var JavascriptValueLocatorString;
  */
 var JavascriptValueLocatorObject;
 
+/**
+ * @typedef {function|Promise} JavascriptValueLocatorProtocol
+ */
+var JavascriptValueLocatorProtocol;
+
+/**
+ * @typedef {string|Promise} JavascriptValueLocatorTarget
+ */
+var JavascriptValueLocatorTarget;
+
 /** The JVL API is an object providing the following properties:
  *	+ {@link load}
  *	+ {@link parse}

@@ -11,8 +11,8 @@ Load javascript values from multiples sources and using multiple protocols
 A JavascriptValueLocator (JVL) is a [string](#javascriptvaluelocatorstring) or an [object](#javascriptvaluelocatorobject) which describe a way to access to a javascript value.
 It must provide at least:
 
--   [A protocol (JavascriptValueLocatorProtocol)](JavascriptValueLocatorProtocol)
--   [A target (JavascriptValueLocatorTarget)](JavascriptValueLocatorTarget)
+-   [A protocol (JavascriptValueLocatorProtocol)](#javascriptvaluelocatorprotocol)
+-   [A target (JavascriptValueLocatorTarget)](#javascriptvaluelocatortarget)
 
 Type: ([JavascriptValueLocatorString](#javascriptvaluelocatorstring) \| [JavascriptValueLocatorObject](#javascriptvaluelocatorobject))
 
@@ -42,8 +42,16 @@ Type: [object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 
 **Properties**
 
--   `protocol` **([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) | JavascriptValueLocatorProtocol)** 
--   `target` **JavascriptValueLocatorTarget** 
+-   `protocol` **([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [JavascriptValueLocatorProtocol](#javascriptvaluelocatorprotocol))** 
+-   `target` **[JavascriptValueLocatorTarget](#javascriptvaluelocatortarget)** 
+
+### JavascriptValueLocatorProtocol
+
+Type: ([function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) \| [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise))
+
+### JavascriptValueLocatorTarget
+
+Type: ([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise))
 
 ### javascript-value-locator
 
