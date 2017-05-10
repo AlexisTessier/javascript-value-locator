@@ -1,17 +1,16 @@
-
 'use strict';
 
-/**
- * @typedef {JavascriptValueLocatorString|JavascriptValueLocatorObject} JavascriptValueLocator
+/** 
+ * @typedef {JavascriptValueLocatorString|JavascriptValueLocatorObject}
  * @description A JavascriptValueLocator (JVL) is a {@link JavascriptValueLocatorString string} or an {@link JavascriptValueLocatorObject object} which describe a way to access to a javascript value.
  * It must provide at least:
  *	+ {@link JavascriptValueLocatorProtocol A protocol (JavascriptValueLocatorProtocol)}
- *	+ {@link JavascriptValueLocatorTarget A target (JavascriptValueLocatorTarget)}
+ *	+ {@link string A target as a string}
  */
-var JavascriptValueLocator;
+var JavascriptValueLocator
 
 /**
- * @typedef {string} JavascriptValueLocatorString
+ * @typedef {string}
  * @description A JavascriptValueLocatorString (JVL string) is a string which describe a way to access to a javascript value. It must matches the following format:
  * + protocol-name:target-name {@link JavascriptValueLocator see JavascriptValueLocator}
  *
@@ -24,24 +23,25 @@ var JavascriptValueLocator;
  * ":target-name" // Missing protocol
  * "protocol-name" // Missing target
  */
-var JavascriptValueLocatorString;
+var JavascriptValueLocatorString
 
 /**
- * @typedef {object} JavascriptValueLocatorObject
- * @property {string|JavascriptValueLocatorProtocol} protocol
- * @property {JavascriptValueLocatorTarget} target
+ * @typedef {object}
+ * @description A JavascriptValueLocatorObject is an object which describe a way to access to a javascript value.
+ * @property {string|JavascriptValueLocatorProtocol} protocol - The name of the protocol or the protocol himself (as a function which respect the {@link JavascriptValueLocatorProtocol JavascriptValueLocatorProtocol definition})
+ * @property {string} target - The javascript value targeted.
  */
-var JavascriptValueLocatorObject;
+var JavascriptValueLocatorObject
 
 /**
- * @typedef {function|Promise} JavascriptValueLocatorProtocol
+ * @typedef {function}
+ * @description A JavascriptValueLocatorProtocol is a function which take the following arguments (resolve, reject, target, options) and resolve the targeted javascript value or reject an error
+ * @param {function} resolve - A resolve function which will be called with the targeted javascript value as single argument
+ * @param {function} reject - A reject function which will be called with a error as single argument if the javascript value load failed
+ * @param {string} target - The target to load and resolve. A target must be a unique identifier/path (or maybe other things depending on the used protocol) to the requested javascript value. You must use it to know which value is requested
+ * @param {object} options - The options passed to the protocol. 
  */
-var JavascriptValueLocatorProtocol;
-
-/**
- * @typedef {string|Promise} JavascriptValueLocatorTarget
- */
-var JavascriptValueLocatorTarget;
+var JavascriptValueLocatorProtocol
 
 /** The JVL API is an object providing the following properties:
  *	+ {@link load}

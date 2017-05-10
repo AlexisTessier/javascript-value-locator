@@ -12,7 +12,7 @@ A JavascriptValueLocator (JVL) is a [string](#javascriptvaluelocatorstring) or a
 It must provide at least:
 
 -   [A protocol (JavascriptValueLocatorProtocol)](#javascriptvaluelocatorprotocol)
--   [A target (JavascriptValueLocatorTarget)](#javascriptvaluelocatortarget)
+-   [A target as a string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 Type: ([JavascriptValueLocatorString](#javascriptvaluelocatorstring) \| [JavascriptValueLocatorObject](#javascriptvaluelocatorobject))
 
@@ -38,20 +38,27 @@ Type: [string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 
 ### JavascriptValueLocatorObject
 
+A JavascriptValueLocatorObject is an object which describe a way to access to a javascript value.
+
 Type: [object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
 
 **Properties**
 
--   `protocol` **([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [JavascriptValueLocatorProtocol](#javascriptvaluelocatorprotocol))** 
--   `target` **[JavascriptValueLocatorTarget](#javascriptvaluelocatortarget)** 
+-   `protocol` **([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [JavascriptValueLocatorProtocol](#javascriptvaluelocatorprotocol))** The name of the protocol or the protocol himself (as a function which respect the [JavascriptValueLocatorProtocol definition](#javascriptvaluelocatorprotocol))
+-   `target` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The javascript value targeted.
 
 ### JavascriptValueLocatorProtocol
 
-Type: ([function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) \| [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise))
+A JavascriptValueLocatorProtocol is a function which take the following arguments (resolve, reject, target, options) and resolve the targeted javascript value or reject an error
 
-### JavascriptValueLocatorTarget
+Type: [function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)
 
-Type: ([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise))
+**Parameters**
+
+-   `resolve` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A resolve function which will be called with the targeted javascript value as single argument
+-   `reject` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A reject function which will be called with a error as single argument if the javascript value load failed
+-   `target` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The target to load and resolve. A target must be a unique identifier/path (or maybe other things depending on the used protocol) to the requested javascript value. You must use it to know which value is requested
+-   `options` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** The options passed to the protocol.
 
 ### javascript-value-locator
 
@@ -60,7 +67,7 @@ The JVL API is an object providing the following properties:
 -   [load](#load)
 -   [parse](parse)
 -   [stringify](stringify)
--   [defaultProtocols](defaultProtocols)
+-   [defaultProtocols](#defaultprotocols)
 
 **Examples**
 
@@ -83,3 +90,35 @@ This function loads a javascript value in a async way
     -   `inject.protocols` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** A Dictionnary where keys are the names of the protocols and value are the protocols functions. If locator is an object, it can provide directly a protocols key which will be merged with the inject.protocols parameter. (optional, default `defaultProtocols`)
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)** A promise resolving the javascript value targeted by the locator.
+
+### defaultProtocols
+
+This object contains the defaults protocols defined by the javascript-value-locator package :
+
+-   [require](https://nodejs.org/api/globals.html#globals_require)
+
+You can use it, for example, in order to create a new load functions with new custom protocols.
+
+**Examples**
+
+```javascript
+//import the load function and the default-protocols
+const {load, defaultProtocols} = require('javascript-value-locator')
+
+//define some custom protocols
+const customProtocols = {
+    newProtocol: function(resolve, reject, target, options){
+        resolve(getTheValueUsingTheTargetAndOptions)
+        //or
+        reject()
+    }
+}
+
+//create and export a function which call the original function,
+//but passing to it a new protocols object dependency
+module.exports = function customLoad(locator, options){
+    return load(locator, options, {
+        protocols: Object.assign({}, defaultProtocols, customProtocols)
+    })
+}
+```

@@ -90,7 +90,7 @@
       </div>
       <div class='fix-margin-3'>
         <section class='p2 mb2 clearfix bg-white minishadow'>
-          <a href="<%- config['project-homepage'] %>" target="_blank">Before anything else, go read the Readme</a>
+          <a href="<%- config['project-homepage'] %>" target="_blank">Readme</a>
         </section>
         <% docs.forEach(function(s) { %>
           <% if (s.kind !== 'note') { %>

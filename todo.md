@@ -1,7 +1,7 @@
 + Add documentation on functions
 + scope the package
-+ Add introduction on the README
-+ Add some badges to the top of the documentation
++ Add introduction on the README and on the documentation
++ Add some badges to the top of the README
 	+ version
 	+ npm version
 	+ project status: experimental

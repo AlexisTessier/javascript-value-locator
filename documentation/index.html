@@ -65,16 +65,6 @@
               
                 
                 <li><a
-                  href='#javascriptvaluelocatortarget'
-                  class="">
-                  JavascriptValueLocatorTarget
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
                   href='#javascript-value-locator'
                   class="">
                   javascript-value-locator
@@ -93,13 +83,23 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#defaultprotocols'
+                  class="">
+                  defaultProtocols
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
         </div>
       </div>
       <div class='fix-margin-3'>
         <section class='p2 mb2 clearfix bg-white minishadow'>
-          <a href="https://bitbucket.org/AlexisTessier/javascript-value-locator#readme" target="_blank">Before anything else, go read the Readme</a>
+          <a href="https://bitbucket.org/AlexisTessier/javascript-value-locator#readme" target="_blank">Readme</a>
         </section>
         
           
@@ -120,7 +120,7 @@
 It must provide at least:</p>
 <ul>
 <li><a href="#javascriptvaluelocatorprotocol">A protocol (JavascriptValueLocatorProtocol)</a></li>
-<li><a href="#javascriptvaluelocatortarget">A target (JavascriptValueLocatorTarget)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">A target as a string</a></li>
 </ul>
 
   
@@ -240,7 +240,8 @@ It must provide at least:</p>
   </div>
   
 
-  
+  <p>A JavascriptValueLocatorObject is an object which describe a way to access to a javascript value.</p>
+
   
   
   
@@ -266,13 +267,17 @@ It must provide at least:</p>
       
         <div class='space-bottom0'>
           <span class='code bold'>protocol</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="#javascriptvaluelocatorprotocol">JavascriptValueLocatorProtocol</a>))</code>
-          
+          : The name of the protocol or the protocol himself (as a function which respect the 
+<a href="#javascriptvaluelocatorprotocol">JavascriptValueLocatorProtocol definition</a>
+)
+
           
         </div>
       
         <div class='space-bottom0'>
-          <span class='code bold'>target</span> <code class='quiet'>(<a href="#javascriptvaluelocatortarget">JavascriptValueLocatorTarget</a>)</code>
-          
+          <span class='code bold'>target</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+          : The javascript value targeted.
+
           
         </div>
       
@@ -308,13 +313,14 @@ It must provide at least:</p>
   </div>
   
 
-  
+  <p>A JavascriptValueLocatorProtocol is a function which take the following arguments (resolve, reject, target, options) and resolve the targeted javascript value or reject an error</p>
+
   
   
   
     <p>
       Type:
-      (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>)
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>
     </p>
   
   
@@ -327,56 +333,46 @@ It must provide at least:</p>
   
 
   
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>resolve</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
+	    A resolve function which will be called with the targeted javascript value as single argument
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
+          </div>
           
-        
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>reject</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
+	    A reject function which will be called with a error as single argument if the javascript value load failed
+
+          </div>
           
-            <section class='p2 mb2 clearfix bg-white minishadow'>
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>target</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The target to load and resolve. A target must be a unique identifier/path (or maybe other things depending on the used protocol) to the requested javascript value. You must use it to know which value is requested
 
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='javascriptvaluelocatortarget'>
-      JavascriptValueLocatorTarget
-    </h3>
-    
-    
-  </div>
-  
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>options</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    The options passed to the protocol.
 
-  
-  
-  
-  
-    <p>
-      Type:
-      (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>)
-    </p>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
+          </div>
+          
+        </div>
+      
+    </div>
   
 
   
@@ -415,7 +411,7 @@ It must provide at least:</p>
 <li><a href="#load">load</a></li>
 <li><a href="parse">parse</a></li>
 <li><a href="stringify">stringify</a></li>
-<li><a href="defaultProtocols">defaultProtocols</a></li>
+<li><a href="#defaultprotocols">defaultProtocols</a></li>
 </ul>
 
   
@@ -563,6 +559,81 @@ JVL.load(<span class="hljs-string">'npm:string-humanize@1.0.0'</span>).then(<spa
 
   
 
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='defaultprotocols'>
+      defaultProtocols
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This object contains the defaults protocols defined by the javascript-value-locator package :</p>
+<ul>
+<li><a href="https://nodejs.org/api/globals.html#globals_require">require</a></li>
+</ul>
+<p>You can use it, for example, in order to create a new load functions with new custom protocols.</p>
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">//import the load function and the default-protocols</span>
+<span class="hljs-keyword">const</span> {load, defaultProtocols} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'javascript-value-locator'</span>)
+
+<span class="hljs-comment">//define some custom protocols</span>
+<span class="hljs-keyword">const</span> customProtocols = {
+    <span class="hljs-attr">newProtocol</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject, target, options</span>)</span>{
+        resolve(getTheValueUsingTheTargetAndOptions)
+        <span class="hljs-comment">//or</span>
+        reject()
+    }
+}
+
+<span class="hljs-comment">//create and export a function which call the original function,</span>
+<span class="hljs-comment">//but passing to it a new protocols object dependency</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">customLoad</span>(<span class="hljs-params">locator, options</span>)</span>{
+    <span class="hljs-keyword">return</span> load(locator, options, {
+        <span class="hljs-attr">protocols</span>: <span class="hljs-built_in">Object</span>.assign({}, defaultProtocols, customProtocols)
+    })
+}</pre>
+    
   
 
   
