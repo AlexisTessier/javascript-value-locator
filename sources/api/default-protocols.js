@@ -1,6 +1,7 @@
 'use strict';
 
-/** @name defaultProtocols
+/**
+ * @name defaultProtocols
  * @description This object contains the defaults protocols defined by the javascript-value-locator package :
  *	+ {@link require}
  *

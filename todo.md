@@ -1,4 +1,3 @@
-+ Add documentation on functions
 + scope the package
 + Add introduction on the README and on the documentation
 + Add some badges to the top of the README
@@ -9,6 +8,7 @@
 	+ code coverage (coveralls)
 	+ dependencies status (david)
 	+ look for semantic realease
+	+ look for documentation coverage
 + publish on NPM then on Github
 + fix the more than probable badges issues
 + Open a waffle.io board
@@ -19,4 +19,3 @@
 + Add optional options in jvl
 + Add some examples in documentation
 + Add some default protocols
-+ look for documentation coverage

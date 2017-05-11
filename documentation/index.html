@@ -85,9 +85,39 @@
               
                 
                 <li><a
+                  href='#parse'
+                  class="">
+                  parse
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#stringify'
+                  class="">
+                  stringify
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#defaultprotocols'
                   class="">
                   defaultProtocols
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#require'
+                  class="">
+                  require
                   
                 </a>
                 
@@ -409,8 +439,8 @@ It must provide at least:</p>
   <p>The JVL API is an object providing the following properties:</p>
 <ul>
 <li><a href="#load">load</a></li>
-<li><a href="parse">parse</a></li>
-<li><a href="stringify">stringify</a></li>
+<li><a href="#parse">parse</a></li>
+<li><a href="#stringify">stringify</a></li>
 <li><a href="#defaultprotocols">defaultProtocols</a></li>
 </ul>
 
@@ -576,6 +606,148 @@ JVL.load(<span class="hljs-string">'npm:string-humanize@1.0.0'</span>).then(<spa
   
   <div class='clearfix'>
     
+    <h3 class='fl m0' id='parse'>
+      parse
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function returns a locator object from a JVL string</p>
+
+  
+  
+  <div class='pre p1 fill-light mt0'>parse(JVL: <a href="#javascriptvaluelocatorstring">JavascriptValueLocatorString</a>): <a href="#javascriptvaluelocatorobject">JavascriptValueLocatorObject</a></div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>JVL</span> <code class='quiet'>(<a href="#javascriptvaluelocatorstring">JavascriptValueLocatorString</a>)</code>
+	    The locator as string to parse.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#javascriptvaluelocatorobject">JavascriptValueLocatorObject</a></code>:
+        The corresponding locator as an object.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='stringify'>
+      stringify
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function transforms a locator object to a JVL string</p>
+
+  
+  
+  <div class='pre p1 fill-light mt0'>stringify(locator: <a href="#javascriptvaluelocatorobject">JavascriptValueLocatorObject</a>): <a href="#javascriptvaluelocatorstring">JavascriptValueLocatorString</a></div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>locator</span> <code class='quiet'>(<a href="#javascriptvaluelocatorobject">JavascriptValueLocatorObject</a>)</code>
+	    The locator object to stringify.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="#javascriptvaluelocatorstring">JavascriptValueLocatorString</a></code>:
+        The corresponding JVL string.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
     <h3 class='fl m0' id='defaultprotocols'>
       defaultProtocols
     </h3>
@@ -586,7 +758,7 @@ JVL.load(<span class="hljs-string">'npm:string-humanize@1.0.0'</span>).then(<spa
 
   <p>This object contains the defaults protocols defined by the javascript-value-locator package :</p>
 <ul>
-<li><a href="https://nodejs.org/api/globals.html#globals_require">require</a></li>
+<li><a href="#require">require</a></li>
 </ul>
 <p>You can use it, for example, in order to create a new load functions with new custom protocols.</p>
 
@@ -634,6 +806,87 @@ JVL.load(<span class="hljs-string">'npm:string-humanize@1.0.0'</span>).then(<spa
     })
 }</pre>
     
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='require'>
+      require
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function is a <a href="#javascriptvaluelocatorprotocol">JavascriptValueLocatorProtocol</a> that use the node require function to load the target</p>
+
+  
+  
+  <div class='pre p1 fill-light mt0'>require(resolve: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>, reject: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>, target: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>resolve</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
+	    A resolve function which will be called with the targeted javascript value as single argument
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>reject</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a>)</code>
+	    A reject function which will be called with a error as single argument if the javascript value load failed
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>target</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The target to load and resolve. It must be a path to a valid node module.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
   
 
   

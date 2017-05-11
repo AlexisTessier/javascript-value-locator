@@ -39,7 +39,7 @@ var JavascriptValueLocatorObject
  * @param {function} resolve - A resolve function which will be called with the targeted javascript value as single argument
  * @param {function} reject - A reject function which will be called with a error as single argument if the javascript value load failed
  * @param {string} target - The target to load and resolve. A target must be a unique identifier/path (or maybe other things depending on the used protocol) to the requested javascript value. You must use it to know which value is requested
- * @param {object} options - The options passed to the protocol. 
+ * @param {object} options - The options passed to the protocol.
  */
 var JavascriptValueLocatorProtocol
 

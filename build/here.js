@@ -5,6 +5,29 @@ const path = require('path');
 const markdown = require('markdown').markdown;
 const open = require('open');
 
+/*--------------*/
+
+const history = [];
+
+function previous(back = 0) {
+	return history[history.length - (2 + back)] || history[0];
+}
+
+function __get(route, dataFunction) {
+	const step = {
+		method: 'get',
+		path: route,
+		data(){
+			history.push(step);
+			return dataFunction();
+		}
+	}
+
+	return step;
+}
+
+/*--------------*/
+
 function redirectTo(redirectPath, relative = false){
 	return '<html><head></head><body></body><script type="text/javascript">'+(
 		`	
@@ -24,29 +47,11 @@ function readme() {
 	return markdown.toHTML(readme);
 }
 
-/*--------------*/
-
 module.exports = [
-	{
-		method: 'get',
-		path: '/documentation',
-		data () {
-			open(`file://${path.join(__dirname, '../documentation/index.html')}`);
-			return redirectTo('/readme', /*relative*/true);
-		}
-	},
-	{
-		method: 'get',
-		path: '/readme',
-		data () {
-			return readme();
-		}
-	},
-	{
-		method: 'get',
-		path: '/',
-		data () {
-			return redirectTo('/coverage', /*relative*/true);
-		}
-	}
+	__get('/documentation', ()=>{
+		open(`file://${path.join(__dirname, '../documentation/index.html')}`);
+		return redirectTo(previous().path, /*relative*/true);
+	}),
+	__get('/readme', ()=>readme()),
+	__get('/', ()=>redirectTo('/coverage', /*relative*/true))
 ]

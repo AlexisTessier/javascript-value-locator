@@ -65,8 +65,8 @@ Type: [function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referen
 The JVL API is an object providing the following properties:
 
 -   [load](#load)
--   [parse](parse)
--   [stringify](stringify)
+-   [parse](#parse)
+-   [stringify](#stringify)
 -   [defaultProtocols](#defaultprotocols)
 
 **Examples**
@@ -91,11 +91,31 @@ This function loads a javascript value in a async way
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)** A promise resolving the javascript value targeted by the locator.
 
+### parse
+
+This function returns a locator object from a JVL string
+
+**Parameters**
+
+-   `JVL` **[JavascriptValueLocatorString](#javascriptvaluelocatorstring)** The locator as string to parse.
+
+Returns **[JavascriptValueLocatorObject](#javascriptvaluelocatorobject)** The corresponding locator as an object.
+
+### stringify
+
+This function transforms a locator object to a JVL string
+
+**Parameters**
+
+-   `locator` **[JavascriptValueLocatorObject](#javascriptvaluelocatorobject)** The locator object to stringify.
+
+Returns **[JavascriptValueLocatorString](#javascriptvaluelocatorstring)** The corresponding JVL string.
+
 ### defaultProtocols
 
 This object contains the defaults protocols defined by the javascript-value-locator package :
 
--   [require](https://nodejs.org/api/globals.html#globals_require)
+-   [require](#require)
 
 You can use it, for example, in order to create a new load functions with new custom protocols.
 
@@ -122,3 +142,13 @@ module.exports = function customLoad(locator, options){
     })
 }
 ```
+
+### require
+
+This function is a [JavascriptValueLocatorProtocol](#javascriptvaluelocatorprotocol) that use the node require function to load the target
+
+**Parameters**
+
+-   `resolve` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A resolve function which will be called with the targeted javascript value as single argument
+-   `reject` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A reject function which will be called with a error as single argument if the javascript value load failed
+-   `target` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The target to load and resolve. It must be a path to a valid node module.
