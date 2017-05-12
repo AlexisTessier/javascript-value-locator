@@ -5,7 +5,14 @@
   "main": "index.js",
   "watch": {
     "lint": "./sources",
-    "build": "./sources"
+    "build": {
+      "patterns": [
+        "package.json",
+        "./sources",
+        "./build"
+      ],
+      "extensions": "js,yaml,md,json"
+    }
   },
   "scripts": {
     "lint": "eslint --ext js ./sources",
@@ -15,12 +22,15 @@
     "test": "npm run lint && npm run check-dependencies && npm run coverage",
     "watch-test": "ava --watch --timeout=30000",
     "coverage": "nyc ava --timeout=30000 && npm run report",
-    "show-coverage": "npm run coverage && here -d -w ./",
+    "update-coverage": "npm run coverage && node build/update-coverage",
+    "dev-server": "concurrently \"ttab npm run dev-server-coverage\" \"npm run dev-server-documentation\"",
+    "dev-server-coverage": "here -w -d ./coverage",
+    "dev-server-documentation": "here -w -d ./documentation",
     "entries": "node build/generate-entries",
-    "documentation": "rm -f README.md && node build/generate-readme.view.js && mustache build/tmp/readme.view.json build/readme.tpl.md > README.md && documentation readme index.js -s Documentation && rm -f build/tmp/readme.view.json && documentation build index.js -f html -o documentation -t build/documentation-theme",
+    "documentation": "rm -f README.md && node build/generate-readme.view.js && mustache tmp/build/readme.view.json build/readme.tpl.md > README.md && documentation readme index.js -s Documentation && rm -f tmp/build/readme.view.json && documentation build index.js -f html -o documentation -t build/documentation-theme && node build/generate-readme-html",
     "report": "nyc report --reporter=html",
     "build": "npm run entries && npm run documentation",
-    "dev": "concurrently \"ttab npm run show-coverage\" \"ttab node build/update-coverage\" \"ttab npm run watch-test\" \"ttab npm run watch\"",
+    "dev": "concurrently \"ttab npm run update-coverage\" \"ttab npm run watch-test\" \"ttab npm run watch\" \"ttab npm run dev-server\"",
     "pre-publish": "npm run build && npm test"
   },
   "repository": {
@@ -40,21 +50,25 @@
   "homepage": "https://bitbucket.org/AlexisTessier/javascript-value-locator#readme",
   "devDependencies": {
     "ava": "^0.18.2",
+    "brucedown": "^1.1.1",
     "capitalize": "^1.0.0",
     "concurrently": "^3.4.0",
     "coveralls": "^2.12.0",
+    "dashify": "^0.2.2",
     "dependency-check": "^2.8.0",
     "documentation": "^4.0.0-rc.1",
     "eslint": "^3.18.0",
+    "github-markdown-css": "^2.6.0",
     "glob": "^7.1.1",
     "jsonfile": "^3.0.0",
-    "markdown": "^0.5.0",
+    "marked": "^0.3.6",
     "mkdirp": "^0.5.1",
     "mustache": "^2.3.0",
     "npm-watch": "^0.1.8",
     "nyc": "^10.2.0",
-    "open": "0.0.5",
+    "read-yaml": "^1.1.0",
     "serve-here": "^3.2.0",
+    "shelljs": "^0.7.7",
     "ttab": "^0.5.1"
   },
   "ava": {

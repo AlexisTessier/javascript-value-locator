@@ -4,7 +4,7 @@
  * @typedef {JavascriptValueLocatorString|JavascriptValueLocatorObject}
  * @description A JavascriptValueLocator (JVL) is a {@link JavascriptValueLocatorString string} or an {@link JavascriptValueLocatorObject object} which describe a way to access to a javascript value.
  * It must provide at least:
- *	+ {@link JavascriptValueLocatorProtocol A protocol (JavascriptValueLocatorProtocol)}
+ *	+ {@link JavascriptValueLocatorProtocol A protocol (JavascriptValueLocatorProtocol)} 
  *	+ {@link string A target as a string}
  */
 var JavascriptValueLocator

@@ -6,7 +6,7 @@ const parseJVL = require('./parse');
 const defaultProtocols = require('./default-protocols');
 
 /**
- * This function loads a javascript value in a async way 
+ * This function loads a javascript value in a async way
  *
  * @param {JavascriptValueLocator} locator - A javascript value locator as an object or a string which follow the JVL format.
  * @param {object} [options=] - The javascript options object which will be passed to the locator protocol function. If locator is an object, it can provide directly an options object which will be merged with the options parameter.

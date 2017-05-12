@@ -1,0 +1,5 @@
+- section: Introduction
+- p: A Javascript Value Locator (JVL) is an object or a string (matching a specific format), which identify a way to load a javascript value.
+- section: About the documentation
+- title: Naming conventions
+- li: CamelCasedValue are used for types <a href="https://en.wikipedia.org/wiki/Duck_typing" target="_blank">see ducktyping</a>

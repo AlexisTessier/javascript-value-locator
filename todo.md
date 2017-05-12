@@ -1,4 +1,3 @@
-+ scope the package
 + Add introduction on the README and on the documentation
 + Add some badges to the top of the README
 	+ version
