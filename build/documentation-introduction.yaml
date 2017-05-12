@@ -1,5 +1,31 @@
 - section: Introduction
-- p: A Javascript Value Locator (JVL) is an object or a string (matching a specific format), which identify a way to load a javascript value.
+- p: >
+    This module provide a minimalist api to load (**asynchronously only**) javascript values from different sources, using **javascript value locators** - ***JVL***.
+    A ***JVL*** is an object or a string (matching a specific format), which represent a way to load a javascript value.
+    It's composed both of a **protocol** and a **target**.
+- js: >
+    //this is a jvl object
+
+    {
+        protocol: 'require',
+        target: 'full/path/to/module/exporting/the/targeted/value'
+    }
+
+
+    //this is the equivalent jvl string
+
+    'require:full/path/to/module/exporting/the/targeted/value'
+- p: >
+    You can see this module as a kind of [webpack](https://webpack.js.org/) at the run time, where protocols are loaders, and where instead of doing this :
+- js: >
+    require.ensure([], require => {
+        const value = require('module/path');
+    })
 - section: About the documentation
+- p: >
+    The following documentation is also available in a more convenient format [here : url](/index.html)
 - title: Naming conventions
-- li: CamelCasedValue are used for types <a href="https://en.wikipedia.org/wiki/Duck_typing" target="_blank">see ducktyping</a>
+- li: CapitalizedCamelCasedNames are used for types [see ducktyping](https://en.wikipedia.org/wiki/Duck_typing)
+- li: dashified-case-names are used for filenames
+- li: camelCasedNames are used for methods and properties
+- section: Documentation
