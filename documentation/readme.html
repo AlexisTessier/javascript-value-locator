@@ -18,25 +18,100 @@
 <p>Load javascript values from multiples sources and using multiple protocols</p>
 <h2 id="introduction">Introduction</h2>
 <p>This module provide a minimalist api to load (<strong>asynchronously only</strong>) javascript values from different sources, using <strong>javascript value locators</strong> - <strong><em>JVL</em></strong>. A <strong><em>JVL</em></strong> is an object or a string (matching a specific format), which represent a way to load a javascript value. It&#39;s composed both of a <strong>protocol</strong> and a <strong>target</strong>.</p>
-<pre><code class="lang-javascript">//this is a jvl object
+<pre><code class="lang-javascript">// this is a jvl object
 {
-    protocol: &#39;require&#39;,
+    protocol: &#39;protocol-name&#39;,
     target: &#39;full/path/to/module/exporting/the/targeted/value&#39;
 }
 
-//this is the equivalent jvl string
-&#39;require:full/path/to/module/exporting/the/targeted/value&#39;
+// this is the equivalent jvl string
+&#39;protocol-name:full/path/to/module/exporting/the/targeted/value&#39;
 </code></pre>
 <p>You can see this module as a kind of <a href="https://webpack.js.org/">webpack</a> at the run time, where protocols are loaders, and where instead of doing this :</p>
 <pre><code class="lang-javascript">require.ensure([], require =&gt; {
     const value = require(&#39;module/path&#39;);
+
+    // do something with the value
 })
 </code></pre>
+<p>You do this: <a name="introduction-examples"></a></p>
+<pre><code class="lang-javascript">const  jvl = require(&#39;javascript-value-locator&#39;);
+
+jvl.load(&#39;require:module/path&#39;).then(value =&gt; {
+    // do something with the value
+})
+</code></pre>
+<p>And for example, if you want to load a yaml, you could use a specific protocol, as you would have used a yaml-loader in webpack</p>
+<pre><code class="lang-javascript">const jvl = require(&#39;javascript-value-locator&#39;);
+
+// Assuming that a &quot;require-yaml&quot; protocol was defined in the first place
+// (which is currently not the case by default)
+jvl.load(&#39;require-yaml:module/path.yaml&#39;).then(value =&gt; {
+    // do something with the value
+})
+</code></pre>
+<p><strong><em>Note that the comparison with webpack is only here for explanatory purpose, this module doesn&#39;t aim the same use cases.</em></strong></p>
+<h3 id="purpose">Purpose</h3>
+<p>The <a href="#introduction-examples">previous examples</a> are here only for the sake of explaining the module basic usage. If you want to require a module in node.js, you should more than probably just do a require (unless you want to load it asynchronously).
+<strong><em>The following use case is the one for what the module was created in the first place</em></strong>.</p>
+<h4 id="use-case">Use case</h4>
+<ul>
+<li>Use the JVL string format to &quot;require&quot; a module in a cli command option</li>
+</ul>
+<p>Assuming you want to provide a command with an option which can be a javascript value. If the option is a number, it&#39;s ok to do that:</p>
+<pre><code>cli command input --javascript-value-option=5
+</code></pre><p>But if the option is a complex/dynamic object, using JVL allow you to do that:</p>
+<pre><code>cli command input --javascript-value-option=require:full/path/to/module
+</code></pre><p>The cli users have in that way a more fine control on the module he want to do some task.
+A logger module is a good example for instance. Assuming you implement a cli command which only log the input, you could have something like : <a name="custom-protocols-example"></a></p>
+<pre><code class="lang-javascript">// load-override.js
+// create a custom load function
+
+const {load, setLocatorDefaultProtocol, defaultProtocols} = require(&#39;javascript-value-locator&#39;);
+
+module.exports = function customLoad(locator, options){
+    // if the locator is an object and doesn&#39;t have protocol property, 
+    // or if it&#39;s a string without protocol ahead, the &#39;custom-protocol&#39; will be used
+
+    load(setLocatorDefaultProtocol(locator, &#39;custom-protocol&#39;), options, {
+        protocols: Object.assign({}, defaultProtocols, {
+            &#39;custom-protocol&#39;: function(resolve, reject, target){
+
+            }
+        })
+    })
+}
+</code></pre>
+<pre><code class="lang-javascript">// log-command.js
+
+function logCommand(input, logger = console){
+
+}
+</code></pre>
+<h4 id="speculative-use-cases">Speculative use cases</h4>
+<p>The module wasn&#39;t thinked in order to do that, but it may could be used to accomplish some of these things:</p>
+<ul>
+<li>Create and use some custom protocols able to load javascript from the cloud</li>
+</ul>
+<ul>
+<li>Use in the browser to load assets (still with custom protocols)</li>
+</ul>
+<ul>
+<li>And probably more...</li>
+</ul>
+<h2 id="get-started">Get started</h2>
+<h3 id="install">Install</h3>
+<h3 id="load-one-or-more-values-from-jvl">Load one or more values from JVL</h3>
+<h3 id="available-protocols">Available protocols</h3>
+<h3 id="use-custom-protocols">Use custom protocols</h3>
+<p>You can use the inject.protocols option of the load function. <a href="#custom-protocols-example">Look here for concrete example</a>.</p>
+<h3 id="load-a-value-synchronously">Load a value synchronously</h3>
+<p>JVL is not aimed to do that.</p>
 <h2 id="about-the-documentation">About the documentation</h2>
-<p>The following documentation is also available in a more convenient format <a href="/index.html">here : url</a></p>
+<p>The following documentation was generated using <a href="http://documentation.js.org/">documentation.js</a> and is also available in a more interactive format <a href="/index.html">here : url</a></p>
 <h3 id="naming-conventions">Naming conventions</h3>
 <ul>
-<li>CapitalizedCamelCasedNames are used for types <a href="https://en.wikipedia.org/wiki/Duck_typing">see ducktyping</a></li>
+<li>CapitalizedCamelCasedNames are used for <a href="https://en.wikipedia.org/wiki/Duck_typing">types</a></li>
 </ul>
 <ul>
 <li>dashified-case-names are used for filenames</li>
@@ -162,6 +237,8 @@ module.exports = function customLoad(locator, options){
 <li><code>reject</code> <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function">function</a></strong> A reject function which will be called with a error as single argument if the javascript value load failed</li>
 <li><code>target</code> <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></strong> The target to load and resolve. It must be a path to a valid node module.</li>
 </ul>
+<h2 id="license">License</h2>
+<p><a href="https://opensource.org/licenses/MIT">MIT</a> Copyright (c) 2017-present, Alexis Tessier</p>
 
 </div>
 </body>

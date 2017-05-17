@@ -354,4 +354,42 @@ test('load using jol format - require', t => {
 		assert.equal(moduleContent, expectedModule);
 		t.pass();
 	});
-})
+});
+
+test('load an array of valid locators', t => {
+	const load = requireFromIndex('sources/api/load');
+
+	const expectedModules = [
+		requireFromIndex('tests/mocks/fake-module.js'),
+		requireFromIndex('tests/mocks/fake-module-2.js'),
+		requireFromIndex('tests/mocks/fake-module-3.js')
+	];
+
+	const loadPromise = load([
+		`require:${pathFromIndex('tests/mocks/fake-module.js')}`,
+		`require:${pathFromIndex('tests/mocks/fake-module-2.js')}`,
+		`require:${pathFromIndex('tests/mocks/fake-module-3.js')}`
+	]);
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then((moduleContent1, moduleContent2, moduleContent3) => {
+		assert.equal(moduleContent1, expectedModules[0]);
+		assert.equal(moduleContent2, expectedModules[1]);
+		assert.equal(moduleContent3, expectedModules[2]);
+		t.pass();
+	});
+});
+
+test.skip('load an array of locators with an unique options object', t => {
+
+});
+
+test.skip('load an array of locators with an array of options', t => {
+
+});
+
+test.skip('load an array of locators with an array of options with a different length', t => {
+
+});

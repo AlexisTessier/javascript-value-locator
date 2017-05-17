@@ -7,14 +7,14 @@ Load javascript values from multiples sources and using multiple protocols
 This module provide a minimalist api to load (**asynchronously only**) javascript values from different sources, using **javascript value locators** - **_JVL_**. A **_JVL_** is an object or a string (matching a specific format), which represent a way to load a javascript value. It's composed both of a **protocol** and a **target**.
 
 ```javascript
-//this is a jvl object
+// this is a jvl object
 {
-    protocol: 'require',
+    protocol: 'protocol-name',
     target: 'full/path/to/module/exporting/the/targeted/value'
 }
 
-//this is the equivalent jvl string
-'require:full/path/to/module/exporting/the/targeted/value'
+// this is the equivalent jvl string
+'protocol-name:full/path/to/module/exporting/the/targeted/value'
 ```
 
 You can see this module as a kind of [webpack](https://webpack.js.org/) at the run time, where protocols are loaders, and where instead of doing this :
@@ -22,16 +22,127 @@ You can see this module as a kind of [webpack](https://webpack.js.org/) at the r
 ```javascript
 require.ensure([], require => {
     const value = require('module/path');
+
+    // do something with the value
 })
 ```
 
+You do this: <a name="introduction-examples"></a>
+
+```javascript
+const  jvl = require('javascript-value-locator');
+
+jvl.load('require:module/path').then(value => {
+    // do something with the value
+})
+```
+
+And for example, if you want to load a yaml, you could use a specific protocol, as you would have used a yaml-loader in webpack
+
+```javascript
+const jvl = require('javascript-value-locator');
+
+// Assuming that a "require-yaml" protocol was defined in the first place
+// (which is currently not the case by default)
+jvl.load('require-yaml:module/path.yaml').then(value => {
+    // do something with the value
+})
+```
+
+**_Note that the comparison with webpack is only here for explanatory purpose, this module doesn't aim the same use cases._**
+
+### Purpose
+
+The [previous examples](#introduction-examples) are here only for the sake of explaining the module basic usage. If you want to require a module in node.js, you should more than probably just do a require (unless you want to load it asynchronously).
+**_The following use case is the one for what the module was created in the first place_**.
+
+#### Use case
+
+-   Use the JVL string format to "require" a module in a cli command option
+
+Assuming you want to provide a command with an option which can be a javascript value. If the option is a number, it's ok to do that:
+
+    cli command input --javascript-value-option=5
+
+But if the option is a complex/dynamic object, using JVL allow you to do that:
+
+    cli command input --javascript-value-option=require:full/path/to/module
+
+The cli users have in that way a more fine control on the module he want to do some task.
+A logger module is a good example for instance. Assuming you implement a cli command which only log the input, you could have something like : <a name="custom-protocols-example"></a>
+
+```javascript
+// load-override.js
+// create a custom load function
+
+const {load, setLocatorDefaultProtocol, defaultProtocols} = require('javascript-value-locator');
+
+module.exports = function customLoad(locator, options){
+    // if the locator is an object and doesn't have protocol property, 
+    // or if it's a string without protocol ahead, the 'custom-protocol' will be used
+
+    load(setLocatorDefaultProtocol(locator, 'custom-protocol'), options, {
+        protocols: Object.assign({}, defaultProtocols, {
+            'custom-protocol': function(resolve, reject, target, opts){
+
+            }
+        })
+    })
+}
+```
+
+```javascript
+// require
+```
+
+```javascript
+// log-command.js
+function logCommand(input, log = console.log){
+    //enable silent mode
+    if(log === false){
+        log = ()=>{};
+    }
+
+
+    assert(typeof log === 'function')
+}
+```
+
+#### Speculative use cases
+
+The module wasn't thinked in order to do that, but it may could be used to accomplish some of these things:
+
+-   Create and use some custom protocols able to load javascript from the cloud
+
+
+-   Use in the browser to load assets (still with custom protocols)
+
+
+-   And probably more...
+
+## Get started
+
+### Install
+
+### Load one or more values from JVL
+
+### Available protocols
+
+### Use custom protocols
+
+You can use the inject.protocols option of the load function. [Look here for concrete example](#custom-protocols-example).
+
+### Load a value synchronously
+
+JVL is not aimed to do that.
+
 ## About the documentation
 
-The following documentation is also available in a more convenient format [here : url](/index.html)
+The following documentation was generated using [documentation.js](http://documentation.js.org/) and is also available in a more interactive format [here : url](/index.html)
 
 ### Naming conventions
 
--   CapitalizedCamelCasedNames are used for types [see ducktyping](https://en.wikipedia.org/wiki/Duck_typing)
+-   CapitalizedCamelCasedNames are used for [types](https://en.wikipedia.org/wiki/Duck_typing)
 
 
 -   dashified-case-names are used for filenames
@@ -189,3 +300,7 @@ This function is a [JavascriptValueLocatorProtocol](#javascriptvaluelocatorproto
 -   `resolve` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A resolve function which will be called with the targeted javascript value as single argument
 -   `reject` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A reject function which will be called with a error as single argument if the javascript value load failed
 -   `target` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The target to load and resolve. It must be a path to a valid node module.
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT) Copyright (c) 2017-present, Alexis Tessier
