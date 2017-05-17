@@ -101,7 +101,8 @@
             <div class="clearfix">
               <h3 id='<%- slug(section.title) %>' class='fl m0'>
                 <%- section.title %>
-              </h3>w
+              </h3>
+              <%= marked(section.content) %>
             </div>
           </section>
         <% }) %>

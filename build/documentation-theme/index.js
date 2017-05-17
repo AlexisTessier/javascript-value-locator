@@ -28,6 +28,7 @@ module.exports = function(
 
   var sharedImports = {
     imports: {
+      marked: require('marked'),
       slug(str) {
         var slugger = new GithubSlugger();
         return slugger.slug(str);
@@ -103,12 +104,17 @@ module.exports = function(
 
     const introduction = [];
     let currentSection = null;
+    let previousWasLi = false;
     documentationIntroduction.forEach(entry => {
       if (entry.section) {
         currentSection = {
-          title: entry.section
+          title: entry.section,
+          content: ''
         }
         introduction.push(currentSection);
+      }
+      else{
+        currentSection.content += '\n'+markownify(entry)+'\n';
       }
     })
 
@@ -120,7 +126,7 @@ module.exports = function(
               path: 'index.html',
               contents: new Buffer(
                 pageTemplate({
-                  introduction: [],//introduction.filter(section => !['documentation', 'license'].includes(section.title.toLowerCase())),
+                  introduction: introduction.filter(section => !['documentation', 'license'].includes(section.title.toLowerCase())),
                   docs: comments,
                   config: config
                 }),
@@ -133,3 +139,32 @@ module.exports = function(
     );
   });
 };
+
+function markownify(entry) {
+  if (entry.p) {
+    return `${entry.p}`;
+  }
+
+  if (entry.li) {
+    return `+ ${entry.li}`;
+  }
+
+  if (entry.cli) {
+    return '```\n'+entry.cli+'\n```';
+  }
+
+  if (entry.js) {
+    return '```javascript\n'+entry.js+'\n```';
+  }
+
+  if (entry.title) {
+    return `#### ${entry.title}`;
+  }
+
+  if (entry.subtitle) {
+    return `##### ${entry.subtitle}`;
+  }
+
+  console.log(Object.keys(entry))
+  return '';
+}
