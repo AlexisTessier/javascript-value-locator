@@ -56,6 +56,7 @@ var JavascriptValueLocatorProtocol
  */
 module.exports = {
 	load: require('./api/load'),
+	setLocatorDefaultProtocol: require('./api/set-locator-default-protocol'),
 	parse: require('./api/parse'),
 	stringify: require('./api/stringify'),
 	defaultProtocols: require('./api/default-protocols')

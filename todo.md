@@ -1,4 +1,8 @@
-+ Add introduction on the README and on the documentation
++ documentation, update theme to add the section from the introduction.yaml
++ test for load Array of locator
++ implement load Array of locator
++ test for set-locator-default-protocol
++ implement set-locator-default-protocol
 + Add some badges to the top of the README
 	+ version
 	+ npm version
@@ -11,10 +15,15 @@
 + publish on NPM then on Github
 + fix the more than probable badges issues
 + Open a waffle.io board
++ introduction
+	+ read et correct again
+	+ complete get started
+	+ read et correct again
 + move next tasks to the waffle board and start using the module in other project to ensure concept validity
 + Use pegjs to create a real parser
 + Handle computed terms 
 + Add optional username handling
 + Add optional options in jvl
 + Add some examples in documentation
++ Add contributes section in the documentation
 + Add some default protocols

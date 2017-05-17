@@ -99,6 +99,19 @@ module.exports = function(
 
   // push assets into the pipeline as well.
   return new Promise(resolve => {
+    const documentationIntroduction = require('../documentation-introduction.js');
+
+    const introduction = [];
+    let currentSection = null;
+    documentationIntroduction.forEach(entry => {
+      if (entry.section) {
+        currentSection = {
+          title: entry.section
+        }
+        introduction.push(currentSection);
+      }
+    })
+
     vfs.src([__dirname + '/assets/**'], { base: __dirname }).pipe(
       concat(function(files) {
         resolve(
@@ -107,6 +120,7 @@ module.exports = function(
               path: 'index.html',
               contents: new Buffer(
                 pageTemplate({
+                  introduction: [],//introduction.filter(section => !['documentation', 'license'].includes(section.title.toLowerCase())),
                   docs: comments,
                   config: config
                 }),

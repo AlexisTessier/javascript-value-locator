@@ -3,6 +3,10 @@
 
 {{description}}
 
+{{#menu}}
++ [{{{label}}}](#{{{anchor}}})
+{{/menu}}
+
 {{#content}}
 
 {{#section}}

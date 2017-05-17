@@ -18,10 +18,14 @@
           <input
             placeholder='Filter'
             id='filter-input'
-            class='col12 block input'
             type='text' />
           <div id='toc'>
             <ul class='list-reset h5 py1-ul'>
+              <% introduction.forEach(function(section) { %>
+              <li><a href='#<%=slug(section.title)%>' class="">
+                <%- section.title %>  
+              </a></li>
+              <% }) %>
               <% docs.forEach(function(doc) { %>
                 <% var hasMembers = doc.members.static.length || doc.members.instance.length %>
                 <li><a
@@ -92,6 +96,15 @@
         <section class='p2 mb2 clearfix bg-white minishadow'>
           <a href="/readme.html">Readme</a> - <a href="<%- config['project-homepage'] %>" target="_blank">Github</a>
         </section>
+        <% introduction.forEach(function(section) { %>
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+            <div class="clearfix">
+              <h3 id='<%- slug(section.title) %>' class='fl m0'>
+                <%- section.title %>
+              </h3>w
+            </div>
+          </section>
+        <% }) %>
         <% docs.forEach(function(s) { %>
           <% if (s.kind !== 'note') { %>
             <%= renderSection({

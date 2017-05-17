@@ -2,8 +2,8 @@
 
 const path = require('path');
 
-const readYaml = require('read-yaml');
 const capitalize = require('capitalize');
+const dashify = require('dashify');
 
 const pkg = require('../package.json');
 
@@ -11,10 +11,15 @@ const pkg = require('../package.json');
 
 const view = Object.assign({}, pkg, {
 	name: capitalize.words(pkg.name.replace(/\-/g, ' ')),
-	content: readYaml.sync(path.join(__dirname, `documentation-introduction.yaml`), {encoding: 'utf-8'})
+	content: require('./documentation-introduction.js')
 });
 
 /*--------------*/
+
+view.menu = view.content.filter(block => block.section).map(({section}) => ({
+	label: section,
+	anchor: dashify(section)
+}));
 
 const mkdirp = require('mkdirp');
 

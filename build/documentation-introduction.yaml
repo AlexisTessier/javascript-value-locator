@@ -16,7 +16,7 @@
 
     'protocol-name:full/path/to/module/exporting/the/targeted/value'
 - p: >
-    You can see this module as a kind of [webpack](https://webpack.js.org/) at the run time, where protocols are loaders, and where instead of doing this :
+    You can see this module as a kind of [webpack](https://webpack.js.org/) at the run time, where protocols are loaders, and where instead of doing this :
 - js: >
     require.ensure([], require => {
         const value = require('module/path');
@@ -24,9 +24,9 @@
         // do something with the value
     })
 - p: >
-    You do this: <a name="introduction-examples"></a>
+    You do this : <a name="introduction-examples"></a>
 - js: >
-    const  jvl = require('javascript-value-locator');
+    const jvl = require('javascript-value-locator');
 
 
     jvl.load('require:module/path').then(value => {
@@ -38,41 +38,42 @@
     const jvl = require('javascript-value-locator');
 
 
-    // Assuming that a "require-yaml" protocol was defined in the first place
-
-    // (which is currently not the case by default)
-
+    /**
+     * Assuming that a "require-yaml" protocol was defined in the first place
+     * (which is currently not the case)
+     */
     jvl.load('require-yaml:module/path.yaml').then(value => {
         // do something with the value
     })
 - p: >
     ***Note that the comparison with webpack is only here for explanatory purpose, this module doesn't aim the same use cases.***
-- title: Purpose
+- section: Purpose and use cases
 - p: >
     The [previous examples](#introduction-examples) are here only for the sake of explaining the module basic usage.
     If you want to require a module in node.js, you should more than probably just do a require (unless you want to load it asynchronously).
     
     ***The following use case is the one for what the module was created in the first place***.
-- subtitle: Use case
 - li: Use the JVL string format to "require" a module in a cli command option
 - p: >
-    Assuming you want to provide a command with an option which can be a javascript value. If the option is a number, it's ok to do that:
+    Assuming you want to provide a command with an option which can be a javascript value. If the option is a number, it's ok to do that :
 - cli: >
     cli command input --javascript-value-option=5
 - p: >
-    But if the option is a complex/dynamic object, using JVL allow you to do that:
+    But if the option is a complex/dynamic object, using JVL allow you to do that :
 - cli: >
     cli command input --javascript-value-option=require:full/path/to/module
 - p: >
-    The cli users have in that way a more fine control on the module he want to do some task.
+    The cli users have in that way a more fine control over the module he wants use to do some task.
 
-    A logger module is a good example for instance. Assuming you implement a cli command which only log the input, you could have something like :
+    A logger module is a good example. Imagine you implement a cli command which only log the input, you could have something like :
     <a name="custom-protocols-example"></a>
 - js: >
-    // load-override.js
+    // ./load-override.js
 
     // create a custom load function
 
+
+    const path = require('path');
 
     const {load, setLocatorDefaultProtocol, defaultProtocols} = require('javascript-value-locator');
 
@@ -81,40 +82,80 @@
         // if the locator is an object and doesn't have protocol property, 
         // or if it's a string without protocol ahead, the 'custom-protocol' will be used
 
-        load(setLocatorDefaultProtocol(locator, 'custom-protocol'), options, {
+        return load(setLocatorDefaultProtocol(locator, 'custom-protocol'), options, {
             protocols: Object.assign({}, defaultProtocols, {
-                'custom-protocol': function(resolve, reject, target, opts){
+                ['custom-protocol'](resolve, reject, target){
+                    
+                    // define a way to "require" the javascript value targeted
+                    // for instance, require the path from a custom directory
+                    // It will allow to provide some built-in log functions
 
+                    defaultProtocols.require(resolve, reject,
+                        path.join(__dirname, '../custom/directory/path', target)
+                    );
                 }
             })
         })
     }
 - js: >
-    // require
-- js: >
-    // log-command.js
+    // ./log-command.js
 
-    function logCommand(input, log = console.log){
-        //enable silent mode
+    // then use the custom load function in your log command implementation
+
+
+    const load = require('./load-override');
+
+
+    module.exports = async function logCommand(
+        input,
+        log = (...logs) => console.log(...logs) // provide a default logger
+    ){
+        // enable silent mode
         if(log === false){
             log = ()=>{};
         }
 
+        // enable the user to directly use a function as log option
+        if(typeof log !== 'function'){
+            log = await load(log);
+        }
 
-        assert(typeof log === 'function')
+        assert(typeof log === 'function');
+
+        return log(input);
     }
+- p: >
+    Make the cli implementation which will call this async function, then your users can do :
+- li: this will use a simple console.log
+- cli: cli log "hello world"
+- li: this will not log anything
+- cli: cli log "hello world" --log=false
+- li: this will use a built-in logger defined in custom/directory/path
+- cli: cli log "hello world" --log=custom-protocol:log-one
+- li: this will use an other built-in logger defined in custom/directory/path
+- cli: cli log "hello world" --log=log-two
+- li: this will use a logger defined by the user
+- cli: cli log "hello world" --log=require:path/to/a/custom/logger
 - subtitle: Speculative use cases
 - p: >
-    The module wasn't thinked in order to do that, but it may could be used to accomplish some of these things:
+    The module wasn't thinked in order to do that, but it may could be used to accomplish some of these things :
 - li: Create and use some custom protocols able to load javascript from the cloud
 - li: Use in the browser to load assets (still with custom protocols)
 - li: And probably more...
 - section: Get started
 - title: Install
+- li: using npm
+- cli: >
+    npm install --save javascript-value-locator
+- li: or using yarn
+- cli: >
+    yarn add javascript-value-locator
 - title: Load one or more values from JVL
+- p: TO DO - [see the load function documentation for now](#load)
 - title: Available protocols
+- p: Currently, the only implemented protocol is the [require](#require). If needed, [add others](#use-custom-protocols) and eventually open a issue or event better, a PR.
 - title: Use custom protocols 
-- p: You can use the inject.protocols option of the load function. [Look here for concrete example](#custom-protocols-example).
+- p: You can use the inject.protocols option of the [load function](#load). [Look here for concrete example](#custom-protocols-example).
 #- title: Nesting and computed values
 - title: Load a value synchronously
 - p: JVL is not aimed to do that.
@@ -131,6 +172,4 @@
 - li: camelCasedNames are used for methods and properties
 - section: Documentation
 - section: License
-- p: >
-    [MIT](https://opensource.org/licenses/MIT)
-    Copyright (c) 2017-present, Alexis Tessier
+- p: "[MIT](https://opensource.org/licenses/MIT) - [Alexis Tessier](https://github.com/AlexisTessier) - 2017-present"

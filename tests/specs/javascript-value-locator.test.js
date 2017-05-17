@@ -21,7 +21,6 @@ test('api', t => {
 	const expectedApiKeys = [
 		'load',
 		'setLocatorDefaultProtocol',
-		'isValid',
 		'parse',
 		'stringify',
 		'defaultProtocols'
@@ -39,7 +38,6 @@ test('api', t => {
 
 	assert.equal(api.load, requireFromIndex('sources/api/load'));
 	assert.equal(api.setLocatorDefaultProtocol, requireFromIndex('sources/api/set-locator-default-protocol'));
-	assert.equal(api.isValid, requireFromIndex('sources/api/is-valid'));
 	assert.equal(api.parse, requireFromIndex('sources/api/parse'));
 	assert.equal(api.stringify, requireFromIndex('sources/api/stringify'));
 	assert(Object.is(api.defaultProtocols, requireFromIndex('sources/api/default-protocols')));
