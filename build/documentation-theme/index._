@@ -26,6 +26,7 @@
                 <%- section.title %>  
               </a></li>
               <% }) %>
+              <hr/>
               <% docs.forEach(function(doc) { %>
                 <% var hasMembers = doc.members.static.length || doc.members.instance.length %>
                 <li><a

@@ -1,4 +1,3 @@
-+ documentation, update theme to add the section from the introduction.yaml
 + test for load Array of locator
 + implement load Array of locator
 + test for set-locator-default-protocol
@@ -27,3 +26,4 @@
 + Add some examples in documentation
 + Add contributes section in the documentation
 + Add some default protocols
++ Create a new custom theme for the documentation

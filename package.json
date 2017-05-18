@@ -27,7 +27,9 @@
     "dev-server-coverage": "here -w -d ./coverage",
     "dev-server-documentation": "here -w -d ./documentation",
     "entries": "node build/generate-entries",
-    "documentation": "rm -f README.md && node build/generate-readme.view.js && mustache tmp/build/readme.view.json build/readme.tpl.md > README.md && documentation readme index.js -s Documentation && rm -f tmp/build/readme.view.json && documentation build index.js -f html -o documentation -t build/documentation-theme && node build/generate-readme-html",
+    "readme": "rm -f README.md && node build/generate-readme.view.js && mustache tmp/build/readme.view.json build/readme.tpl.md > README.md && documentation readme index.js -s Documentation && rm -f tmp/build/readme.view.json",
+    "html-doc": "documentation build index.js -f html -o documentation -t build/documentation-theme && node build/generate-readme-html",
+    "documentation": "npm run readme && npm run html-doc",
     "report": "nyc report --reporter=html",
     "build": "npm run entries && npm run documentation",
     "dev": "concurrently \"ttab npm run update-coverage\" \"ttab npm run watch-test\" \"ttab npm run watch\" \"ttab npm run dev-server\"",
@@ -50,7 +52,6 @@
   "homepage": "https://bitbucket.org/AlexisTessier/javascript-value-locator#readme",
   "devDependencies": {
     "ava": "^0.18.2",
-    "brucedown": "^1.1.1",
     "capitalize": "^1.0.0",
     "concurrently": "^3.4.0",
     "coveralls": "^2.12.0",

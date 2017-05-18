@@ -20,8 +20,18 @@ module.exports = function parse(JVL) {
 		throw new Error(`"${JVL}" is not a valid Javascript Value Locator string. It must contains the seperator sign "${JVLStringProtocolTargetSeparator}" between a protocol name and a target name`);
 	}
 
-	return {
+	const locator = {
 		protocol: JVL.substring(0, separatorIndex),
 		target: JVL.substring(separatorIndex+1)
 	}
+
+	if(locator.protocol.length === 0){
+		throw new Error(`"${JVL}" is not a valid Javascript Value Locator string. The protocol is missing.`);
+	}
+
+	if(locator.target.length === 0){
+		throw new Error(`"${JVL}" is not a valid Javascript Value Locator string. The target is missing.`);
+	}
+
+	return locator;
 }

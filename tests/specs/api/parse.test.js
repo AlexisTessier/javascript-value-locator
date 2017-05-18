@@ -53,12 +53,28 @@ test('parse unvalid JVL string', t => {
 	});
 
 	t.is(stringTooShortError.message, expectedErrorMessage('wo'));
+
+	const missingProtocolError = t.throws(() => {
+		parse(':target');
+	});
+
+	function missingPartErrorMessage(input, missing) {
+		return `"${input}" is not a valid Javascript Value Locator string. The ${missing} is missing.`;
+	}
+
+	t.is(missingProtocolError.message, missingPartErrorMessage(':target', 'protocol'));
+
+	const missingTargetError = t.throws(() => {
+		parse('protocol:');
+	});
+
+	t.is(missingTargetError.message, missingPartErrorMessage('protocol:', 'target'));
 });
 
 test('parse unvalid JVL', t => {
 	const parse = requireFromIndex('sources/api/parse');
 
-	const unvalidValues = [null, 4, false, true, {}, [], / /, {
+	const unvalidValues = ['protocol:', ':target', 'target', null, 4, false, true, {}, [], / /, {
 		protocol: 'p',
 		target: 't'
 	}, {

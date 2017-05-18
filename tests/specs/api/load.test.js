@@ -26,7 +26,6 @@ test('load using locator object', t => {
 		target: 'fake-module'
 	});
 
-
 	assert(loadPromise instanceof Promise);
 
 	t.plan(1);
@@ -356,7 +355,7 @@ test('load using jol format - require', t => {
 	});
 });
 
-test.skip('load an array of valid locators', t => {
+test('load an array of valid locators', t => {
 	const load = requireFromIndex('sources/api/load');
 
 	const expectedModules = [
@@ -368,7 +367,10 @@ test.skip('load an array of valid locators', t => {
 	const loadPromise = load([
 		`require:${pathFromIndex('tests/mocks/fake-module.js')}`,
 		`require:${pathFromIndex('tests/mocks/fake-module-2.js')}`,
-		`require:${pathFromIndex('tests/mocks/fake-module-3.js')}`
+		{
+			protocol: 'require',
+			target: `${pathFromIndex('tests/mocks/fake-module-3.js')}`
+		}
 	]);
 
 	assert(loadPromise instanceof Promise);
@@ -382,14 +384,85 @@ test.skip('load an array of valid locators', t => {
 	});
 });
 
-test.skip('load an array of locators with an unique options object', t => {
+test('load an array of locators with an unique options object', t => {
+	const load = requireFromIndex('sources/api/load');
+
+	const expectedOptions = {};
+
+	const loadPromise = load([
+		'protocol1:target1',
+		'protocol1:target2',
+		'protocol2:target3'
+	], expectedOptions, {
+		protocols: {
+			protocol1(resolve, reject, target, opt){
+				resolve({
+					protocol: 'protocol1',
+					target,
+					options: opt
+				})
+			},
+			protocol2(resolve, reject, target, opt){
+				resolve({
+					protocol: 'protocol2',
+					target,
+					options: opt
+				})
+			}
+		}
+	});
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(([value1, value2, value3]) => {
+		const errorMessage = (
+`When loading an array of locators with an unique options object,  
+all the protocols should be called with this unique options object`
+		);
+
+		assert.equal(value1.protocol, 'protocol1');
+		assert.equal(value1.target, 'target1');
+		assert(Object.is(value1.options, expectedOptions), errorMessage)
+
+		assert.equal(value2.protocol, 'protocol1');
+		assert.equal(value2.target, 'target2');
+		assert(Object.is(value2.options, expectedOptions), errorMessage)
+
+		assert.equal(value3.protocol, 'protocol2');
+		assert.equal(value3.target, 'target3');
+		assert(Object.is(value3.options, expectedOptions), errorMessage)
+		
+		t.pass();
+	});
+});
+
+test.skip('load an array of locators with an array of options objects', t => {
+	const load = requireFromIndex('sources/api/load');
+
 
 });
 
-test.skip('load an array of locators with an array of options', t => {
+test.skip('load an array of locators with an array of options objects with a different length', t => {
+	const load = requireFromIndex('sources/api/load');
+
 
 });
 
-test.skip('load an array of locators with an array of options with a different length', t => {
+test.skip('load an array of locators with an array of options objects which also contains explicitly null values', t => {
+	const load = requireFromIndex('sources/api/load');
 
+
+});
+
+test.skip('load an array of locators with an array of options objects and some options setted directly in the locator', t => {
+	const load = requireFromIndex('sources/api/load');
+
+	
+});
+
+test.skip('load an array of locators with an unique options object and some options setted directly in the locator', t => {
+	const load = requireFromIndex('sources/api/load');
+
+	
 });
