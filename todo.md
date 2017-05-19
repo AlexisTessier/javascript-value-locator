@@ -1,5 +1,3 @@
-+ test for load Array of locator
-+ implement load Array of locator
 + test for set-locator-default-protocol
 + implement set-locator-default-protocol
 + Add some badges to the top of the README

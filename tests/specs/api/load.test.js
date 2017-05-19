@@ -205,7 +205,8 @@ test('check options override', t => {
 	const load = requireFromIndex('sources/api/load');
 
 	const expectedOptions = {
-		fakeKey: 'fakeValue'
+		fakeKey: 'fakeValue',
+		fakeKey2: 'fakeValue2'
 	};
 	let passedOptions = null;
 
@@ -215,9 +216,12 @@ test('check options override', t => {
 			resolve(`fake-protocol--${moduleName}`);
 		},
 		target: 'fake-module',
-		options: expectedOptions
+		options: {
+			fakeKey: 'fakeValue'
+		}
 	}, {
-		fakeKey: 'not-fakeValue'
+		fakeKey: 'not-fakeValue',
+		fakeKey2: 'fakeValue2'
 	});
 
 	assert(loadPromise instanceof Promise);
@@ -252,7 +256,23 @@ test('load using undefined protocol', t => {
 		});
 	});
 
-	t.is(undefinedProtocolError.message, `"undefinedProtocol" is not a defined protocol. Existing protocol(s) are exisitingProtocol, exisitingProtocol2, exisitingProtocol3`);
+	t.is(undefinedProtocolError.message, `"undefinedProtocol" is not a defined protocol. Existing protocols are "exisitingProtocol", "exisitingProtocol2", "exisitingProtocol3"`);
+
+	const undefinedProtocolErrorPrim = t.throws(() => {
+		load({
+			protocol: 'undefinedProtocol',
+			target: 'fake-module',
+			protocols: {
+				exisitingProtocol (){
+
+				}
+			}
+		}, null, {
+			protocols: null
+		});
+	});
+
+	t.is(undefinedProtocolErrorPrim.message, `"undefinedProtocol" is not a defined protocol. Existing protocol is "exisitingProtocol"`);
 })
 
 test('load using unvalid protocol', t => {
@@ -387,7 +407,9 @@ test('load an array of valid locators', t => {
 test('load an array of locators with an unique options object', t => {
 	const load = requireFromIndex('sources/api/load');
 
-	const expectedOptions = {};
+	const expectedOptions = {
+		key1: 'value1'
+	};
 
 	const loadPromise = load([
 		'protocol1:target1',
@@ -423,46 +445,262 @@ all the protocols should be called with this unique options object`
 
 		assert.equal(value1.protocol, 'protocol1');
 		assert.equal(value1.target, 'target1');
-		assert(Object.is(value1.options, expectedOptions), errorMessage)
+		assert.deepEqual(value1.options, expectedOptions, errorMessage)
 
 		assert.equal(value2.protocol, 'protocol1');
 		assert.equal(value2.target, 'target2');
-		assert(Object.is(value2.options, expectedOptions), errorMessage)
+		assert.deepEqual(value2.options, expectedOptions, errorMessage)
 
 		assert.equal(value3.protocol, 'protocol2');
 		assert.equal(value3.target, 'target3');
-		assert(Object.is(value3.options, expectedOptions), errorMessage)
+		assert.deepEqual(value3.options, expectedOptions, errorMessage)
 		
 		t.pass();
 	});
 });
 
-test.skip('load an array of locators with an array of options objects', t => {
+test('load an array of locators with an array of options objects', t => {
 	const load = requireFromIndex('sources/api/load');
 
+	const expectedOptions = [{
+		key1: 'value1'
+	}, {
+		key2: 'value2'
+	}, {
+		key3: 'value3'
+	}];
 
+	const loadPromise = load([
+		'protocol1:target1',
+		'protocol1:target2',
+		'protocol2:target3'
+	], expectedOptions, {
+		protocols: {
+			protocol1(resolve, reject, target, opt){
+				resolve({
+					protocol: 'protocol1',
+					target,
+					options: opt
+				})
+			},
+			protocol2(resolve, reject, target, opt){
+				resolve({
+					protocol: 'protocol2',
+					target,
+					options: opt
+				})
+			}
+		}
+	});
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(([value1, value2, value3]) => {
+		const errorMessage = (
+`When loading an array of locators with an array of options object,  
+each protocols should be called with this corresponding options object`
+		);
+
+		assert.equal(value1.protocol, 'protocol1');
+		assert.equal(value1.target, 'target1');
+		assert.deepEqual(value1.options, expectedOptions[0], errorMessage)
+
+		assert.equal(value2.protocol, 'protocol1');
+		assert.equal(value2.target, 'target2');
+		assert.deepEqual(value2.options, expectedOptions[1], errorMessage)
+
+		assert.equal(value3.protocol, 'protocol2');
+		assert.equal(value3.target, 'target3');
+		assert.deepEqual(value3.options, expectedOptions[2], errorMessage)
+		
+		t.pass();
+	});
 });
 
-test.skip('load an array of locators with an array of options objects with a different length', t => {
+test('load an array of locators with an array of options objects with a different length', t => {
 	const load = requireFromIndex('sources/api/load');
 
+	const locatorsArrayLengthDifferentFromOptionsObjectsArrayLengthError = t.throws(()=>{
+		load([
+			'protocol1:target1',
+			'protocol1:target2'
+		], [{}, {}, {}], {
+			protocols: {
+				protocol1(resolve, reject, target, opt){
+					resolve(target)
+				}
+			}
+		});
+	});
 
+	t.is(locatorsArrayLengthDifferentFromOptionsObjectsArrayLengthError.message,
+		`When using the Javascript Value Locator load function with an Array of locators and an Array of options objects, the two Arrays must contains the same number of elements.`
+	)
 });
 
-test.skip('load an array of locators with an array of options objects which also contains explicitly null values', t => {
+test('load an array of locators with an array of options objects which also contains explicitly null (or undefined) values', t => {
 	const load = requireFromIndex('sources/api/load');
 
+	const expectedOptionsObject1 = {
+		key1: 'value1'
+	};
+	const expectedOptionsObject2 = {
+		key2: 'value2'
+	};
 
+	const loadPromise = load([
+		'protocol:target1',
+		'protocol:target2',
+		'protocol:target3',
+		'protocol:target4',
+	], [expectedOptionsObject1, null, expectedOptionsObject2, undefined], {
+		protocols: {
+			protocol(resolve, reject, target, opt){
+				resolve(opt)
+			}
+		}
+	});
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(([value1, value2, value3, value4]) => {
+		const errorMessage = (
+`When loading an array of locators with an array of options object,  
+if null or undefined are explicitly used instead of an options, options must be an empty object`
+		);
+
+		assert.deepEqual(value1, expectedOptionsObject1, errorMessage)
+
+		assert.deepEqual(value2, {}, errorMessage);
+
+		assert.deepEqual(value3, expectedOptionsObject2, errorMessage)
+
+		assert.deepEqual(value4, {}, errorMessage);
+		
+		t.pass();
+	});
 });
 
-test.skip('load an array of locators with an array of options objects and some options setted directly in the locator', t => {
+test('load an array of locators with an unique options object and some options setted directly in the locator', t => {
 	const load = requireFromIndex('sources/api/load');
 
-	
+	const expectedOptionsObject1 = {
+		key1: 'value1',
+		key2: 'value2',
+		key3: 'value3'
+	};
+	const expectedOptionsObject2 = {
+		key1: 'value1',
+		key3: 'value3'
+	};
+	const expectedOptionsObject3 = {
+		key1: 'value1',
+		key2: 'value2',
+		key3: 'value4'
+	};
+
+	const loadPromise = load([
+		{
+			protocol: 'p',
+			target: 't',
+			options: {
+				key2: 'value2'
+			}
+		},
+		'p:target2',
+		{
+			protocol: 'p',
+			target: 't',
+			options: {
+				key2: 'value2',
+				key3: 'value4'
+			}
+		}
+	], {
+		key1: 'value1',
+		key3: 'value3'
+	}, {
+		protocols: {
+			p(resolve, reject, target, opt){
+				resolve(opt)
+			}
+		}
+	});
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(([value1, value2, value3]) => {
+
+		assert.deepEqual(value1, expectedOptionsObject1);
+		assert.deepEqual(value2, expectedOptionsObject2);
+		assert.deepEqual(value3, expectedOptionsObject3);
+		
+		t.pass();
+	});
 });
 
-test.skip('load an array of locators with an unique options object and some options setted directly in the locator', t => {
+test('load an array of locators with an array of options objects and some options setted directly in the locator', t => {
 	const load = requireFromIndex('sources/api/load');
 
-	
+	const expectedOptionsObject1 = {
+		key1: 'value1',
+		key2: '1-value2',
+		key3: '1-value3'
+	};
+	const expectedOptionsObject2 = {
+		key2: '2-value2'
+	};
+	const expectedOptionsObject3 = {
+		key1: 'value1',
+		key2: 'value2',
+		key3: '3-value3'
+	};
+
+	const loadPromise = load([
+		{
+			protocol: 'p',
+			target: 't',
+			options: {
+				key1: 'value1'
+			}
+		},
+		'p:target2',
+		{
+			protocol: 'p',
+			target: 't',
+			options: {
+				key1: 'value1',
+				key2: 'value2'
+			}
+		}
+	], [{
+		key2: '1-value2',
+		key3: '1-value3'
+	}, {
+		key2: '2-value2'
+	}, {
+		key1: '3-value1',
+		key3: '3-value3'
+	}], {
+		protocols: {
+			p(resolve, reject, target, opt){
+				resolve(opt)
+			}
+		}
+	});
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(([value1, value2, value3]) => {
+
+		assert.deepEqual(value1, expectedOptionsObject1);
+		assert.deepEqual(value2, expectedOptionsObject2);
+		assert.deepEqual(value3, expectedOptionsObject3);
+		
+		t.pass();
+	});
 });

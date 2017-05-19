@@ -3,6 +3,7 @@
 const entries = {
 	'index': 'sources/javascript-value-locator',
 	'load': 'sources/api/load',
+	'set-locator-default-protocol': 'sources/api/set-locator-default-protocol',
 	'parse': 'sources/api/parse',
 	'stringify': 'sources/api/stringify',
 	'default-protocols': 'sources/api/default-protocols'

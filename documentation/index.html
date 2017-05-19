@@ -711,7 +711,7 @@ JVL.load(<span class="hljs-string">'npm:string-humanize@1.0.0'</span>).then(<spa
 
   
   
-  <div class='pre p1 fill-light mt0'>load(locator: <a href="#javascriptvaluelocator">JavascriptValueLocator</a>, options: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?, inject: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
+  <div class='pre p1 fill-light mt0'>load(locator: (<a href="#javascriptvaluelocator">JavascriptValueLocator</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#javascriptvaluelocator">JavascriptValueLocator</a>>), options: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?, inject: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>?): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
   
   
   
@@ -729,8 +729,8 @@ JVL.load(<span class="hljs-string">'npm:string-humanize@1.0.0'</span>).then(<spa
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>locator</span> <code class='quiet'>(<a href="#javascriptvaluelocator">JavascriptValueLocator</a>)</code>
-	    A javascript value locator as an object or a string which follow the JVL format.
+            <span class='code bold'>locator</span> <code class='quiet'>((<a href="#javascriptvaluelocator">JavascriptValueLocator</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#javascriptvaluelocator">JavascriptValueLocator</a>>))</code>
+	    A javascript value locator as an object or a string which follow the JVL format. Can also be an Array of locators.
 
           </div>
           
@@ -790,7 +790,7 @@ JVL.load(<span class="hljs-string">'npm:string-humanize@1.0.0'</span>).then(<spa
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
-        A promise resolving the javascript value targeted by the locator.
+        A promise resolving the javascript value targeted by the locator. If locator was an Array, the promise resolve an Array containing all the targeted values in the same order as defined.
 
       
     
