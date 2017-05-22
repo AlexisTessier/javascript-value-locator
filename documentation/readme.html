@@ -232,6 +232,7 @@ It must provide at least:</p>
 <p>The JVL API is an object providing the following properties:</p>
 <ul>
 <li><a href="#load">load</a></li>
+<li><a href="#setlocatordefaultprotocol">setLocatorDefaultProtocol</a></li>
 <li><a href="#parse">parse</a></li>
 <li><a href="#stringify">stringify</a></li>
 <li><a href="#defaultprotocols">defaultProtocols</a></li>
@@ -254,6 +255,14 @@ JVL.load(&#39;npm:string-humanize@1.0.0&#39;).then(_ =&gt; console.log(_(&#39;he
 </li>
 </ul>
 <p>Returns <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></strong> A promise resolving the javascript value targeted by the locator. If locator was an Array, the promise resolve an Array containing all the targeted values in the same order as defined.</p>
+<h3 id="setlocatordefaultprotocol">setLocatorDefaultProtocol</h3>
+<p>This function returns a locator with the specified default protocol if the input locator doesn&#39;t provide one</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>locator</code> <strong>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>) | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)&gt;)</strong> A potential JVL which must at least provide a target. It will be transformed in a valid JVL. If it&#39;s an Array, the function will return an Array of valid JVL. The output JVl will keep the type of the original input locator</li>
+<li><code>defaultProtocol</code> <strong><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></strong> If no protocol is found in the locator, then the default protocol will be setted as the current locator protocol. Note that you can&#39;t provide a protocol as a function using the setLocatorDefaultProtocol function.</li>
+</ul>
+<p>Returns <strong>(<a href="#javascriptvaluelocator">JavascriptValueLocator</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&lt;<a href="#javascriptvaluelocator">JavascriptValueLocator</a>&gt;)</strong> The corresponding locator as an object.</p>
 <h3 id="parse">parse</h3>
 <p>This function returns a locator object from a JVL string</p>
 <p><strong>Parameters</strong></p>

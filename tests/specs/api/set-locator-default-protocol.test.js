@@ -14,7 +14,7 @@ test('type of setLocatorDefaultProtocol', t => {
 	assert.equal(setLocatorDefaultProtocolFromIndex, setLocatorDefaultProtocol);
 });
 
-test.skip('use with a valid JVL string', t => {
+test('use with a valid JVL string', t => {
 	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
 
 	const input = 'protocol:target'
@@ -23,7 +23,7 @@ test.skip('use with a valid JVL string', t => {
 	assert.equal(output, input);
 });
 
-test.skip('use with a missing protocol string', t => {
+test('use with a missing protocol string', t => {
 	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
 	
 	const input = 'target'
@@ -32,7 +32,7 @@ test.skip('use with a missing protocol string', t => {
 	assert.equal(output, `default-protocol:${input}`);
 });
 
-test.skip('use with a missing target string', t => {
+test('use with a missing target string', t => {
 	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
 	
 	const input = 'protocol:'
@@ -42,7 +42,20 @@ test.skip('use with a missing target string', t => {
 	});
 });
 
-test.skip('use with a missing protocol locator object', t => {
+test('use with a valid JVL object', t => {
+	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
+
+	const input = {
+		protocol: 'protocol',
+		target: 'target'
+	};
+
+	const output = setLocatorDefaultProtocol(input, 'default-protocol');
+
+	assert.deepEqual(output, input);
+});
+
+test('use with a missing protocol locator object', t => {
 	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
 	
 	const input = {
@@ -57,7 +70,7 @@ test.skip('use with a missing protocol locator object', t => {
 	});
 });
 
-test.skip('use with a missing target locator object', t => {
+test('use with a missing target locator object', t => {
 	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
 	
 	const input = {
@@ -69,18 +82,70 @@ test.skip('use with a missing target locator object', t => {
 	});
 });
 
-test.skip('use with an array of missing protocol locators', t => {
+test('use with an array of missing protocol locators', t => {
 	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
 	
+	const input = [
+		'defined-protocol:target1',
+		'target2',
+		{
+			protocol: 'defined-protocol-2',
+			target: 'target3'
+		},
+		{
+			target: 'target4'
+		}
+	];
+
+	const output = setLocatorDefaultProtocol(input, 'default-protocol');
+
+	assert.deepEqual(output, [
+		'defined-protocol:target1',
+		'default-protocol:target2',
+		{
+			protocol: 'defined-protocol-2',
+			target: 'target3'
+		},
+		{
+			protocol: 'default-protocol',
+			target: 'target4'
+		}
+	]);
 });
 
-test.skip('use with an array of mixed locators (missing protocol, missing target, string, object, unvalid)', t => {
+test('use with an array of missing protocol locators and some missing target locators', t => {
 	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
 	
+	const input = [
+		'defined-protocol:target1',
+		'target2',
+		{
+			protocol: 'defined-protocol-2',
+			target: 'target3'
+		},
+		{
+			protocol: 'defined-protocol-3'
+		},
+		{
+			target: 'target4'
+		}
+	];
+
+	t.throws(()=>{
+		setLocatorDefaultProtocol(input, 'default-protocol');
+	});
 });
 
-test.skip('use with unvalid parameters', t => {
+test('use with unvalid parameters', t => {
 	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
-	
+
+	[
+		['', 986],
+		[null, ()=>{}]
+	].forEach(unvalidParameters => {
+		t.throws(()=>{
+			setLocatorDefaultProtocol(...unvalidParameters);
+		});
+	})
 });
 

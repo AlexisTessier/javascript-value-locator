@@ -278,6 +278,7 @@ Type: [function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referen
 The JVL API is an object providing the following properties:
 
 -   [load](#load)
+-   [setLocatorDefaultProtocol](#setlocatordefaultprotocol)
 -   [parse](#parse)
 -   [stringify](#stringify)
 -   [defaultProtocols](#defaultprotocols)
@@ -303,6 +304,17 @@ This function loads a javascript value in a async way
     -   `inject.protocols` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** A Dictionnary where keys are the names of the protocols and value are the protocols functions. If locator is an object, it can provide directly a protocols key which will be merged with the inject.protocols parameter. (optional, default `defaultProtocols`)
 
 Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)** A promise resolving the javascript value targeted by the locator. If locator was an Array, the promise resolve an Array containing all the targeted values in the same order as defined.
+
+### setLocatorDefaultProtocol
+
+This function returns a locator with the specified default protocol if the input locator doesn't provide one
+
+**Parameters**
+
+-   `locator` **(([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)) | [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object))>)** A potential JVL which must at least provide a target. It will be transformed in a valid JVL. If it's an Array, the function will return an Array of valid JVL. The output JVl will keep the type of the original input locator
+-   `defaultProtocol` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** If no protocol is found in the locator, then the default protocol will be setted as the current locator protocol. Note that you can't provide a protocol as a function using the setLocatorDefaultProtocol function.
+
+Returns **([JavascriptValueLocator](#javascriptvaluelocator) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[JavascriptValueLocator](#javascriptvaluelocator)>)** The corresponding locator as an object.
 
 ### parse
 

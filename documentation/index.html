@@ -102,6 +102,16 @@
               
                 
                 <li><a
+                  href='#setlocatordefaultprotocol'
+                  class="">
+                  setLocatorDefaultProtocol
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#parse'
                   class="">
                   parse
@@ -648,6 +658,7 @@ It must provide at least:</p>
   <p>The JVL API is an object providing the following properties:</p>
 <ul>
 <li><a href="#load">load</a></li>
+<li><a href="#setlocatordefaultprotocol">setLocatorDefaultProtocol</a></li>
 <li><a href="#parse">parse</a></li>
 <li><a href="#stringify">stringify</a></li>
 <li><a href="#defaultprotocols">defaultProtocols</a></li>
@@ -791,6 +802,86 @@ JVL.load(<span class="hljs-string">'npm:string-humanize@1.0.0'</span>).then(<spa
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></code>:
         A promise resolving the javascript value targeted by the locator. If locator was an Array, the promise resolve an Array containing all the targeted values in the same order as defined.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='setlocatordefaultprotocol'>
+      setLocatorDefaultProtocol
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function returns a locator with the specified default protocol if the input locator doesn't provide one</p>
+
+  
+  
+  <div class='pre p1 fill-light mt0'>setLocatorDefaultProtocol(locator: ((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>) | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)>), defaultProtocol: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): (<a href="#javascriptvaluelocator">JavascriptValueLocator</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#javascriptvaluelocator">JavascriptValueLocator</a>>)</div>
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>locator</span> <code class='quiet'>(((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>) | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)>))</code>
+	    A potential JVL which must at least provide a target. It will be transformed in a valid JVL. If it's an Array, the function will return an Array of valid JVL. The output JVl will keep the type of the original input locator
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>defaultProtocol</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    If no protocol is found in the locator, then the default protocol will be setted as the current locator protocol. Note that you can't provide a protocol as a function using the setLocatorDefaultProtocol function.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>(<a href="#javascriptvaluelocator">JavascriptValueLocator</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="#javascriptvaluelocator">JavascriptValueLocator</a>>)</code>:
+        The corresponding locator as an object.
 
       
     

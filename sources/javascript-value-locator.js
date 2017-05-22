@@ -45,6 +45,7 @@ var JavascriptValueLocatorProtocol
 
 /** The JVL API is an object providing the following properties:
  *	+ {@link load}
+ *	+ {@link setLocatorDefaultProtocol}
  *	+ {@link parse}
  *	+ {@link stringify}
  *	+ {@link defaultProtocols}
