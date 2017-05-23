@@ -1,5 +1,10 @@
-{{name}}
-========
+{{formatedName}}
+================
+
+![Project Status : experimental](https://img.shields.io/badge/Project%20status-experimental-orange.svg)
+
+[![version](https://img.shields.io/badge/version-{{{version}}}-blue.svg)]({{{ homepage}}})
+[![npm version](https://badge.fury.io/js/{{{furyiopath}}}.svg)](https://badge.fury.io/js/{{{furyiopath}}})
 
 {{description}}
 

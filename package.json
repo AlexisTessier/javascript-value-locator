@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://AlexisTessier@bitbucket.org/AlexisTessier/javascript-value-locator.git"
+    "url": "git+https://github.com/AlexisTessier/javascript-value-locator.git"
   },
   "keywords": [
     "node",
@@ -49,7 +49,7 @@
   ],
   "author": "Alexis Tessier",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/AlexisTessier/javascript-value-locator#readme",
+  "homepage": "https://github.com/AlexisTessier/javascript-value-locator#readme",
   "devDependencies": {
     "ava": "^0.18.2",
     "capitalize": "^1.0.0",

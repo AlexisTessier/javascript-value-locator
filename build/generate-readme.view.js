@@ -10,7 +10,8 @@ const pkg = require('../package.json');
 /*--------------*/
 
 const view = Object.assign({}, pkg, {
-	name: capitalize.words(pkg.name.replace(/\-/g, ' ')),
+	formatedName: capitalize.words(pkg.name.replace(/\-/g, ' ')),
+	furyiopath: `%40alexistessier%2Fr${pkg.name}`,
 	content: require('./documentation-introduction.js')
 });
 

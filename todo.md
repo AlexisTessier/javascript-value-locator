@@ -1,13 +1,10 @@
 + Add some badges to the top of the README
-	+ version
-	+ npm version
-	+ project status: experimental
 	+ build status (travis.ci)
 	+ code coverage (coveralls)
 	+ dependencies status (david)
 	+ look for semantic realease
 	+ look for documentation coverage
-+ publish on NPM then on Github
++ publish on NPM
 + fix the more than probable badges issues
 + Open a waffle.io board
 + introduction
