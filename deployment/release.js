@@ -23,7 +23,7 @@ else if(shell.exec(`npm test`).code !== 0) {
 	shell.echo('Error: Release Tests failed');
 	shell.exit(1);
 }
-else if(shell.exec(`git commit -a -m "Auto-commit : release ${pkg.version}"`) !== 0){
+else if(shell.exec(`git commit -a -m "Auto-commit : release ${pkg.version}"`).code !== 0){
 	shell.echo('Error: Git commit failed');
 	shell.exit(1);
 }
