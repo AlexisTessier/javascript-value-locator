@@ -2,7 +2,7 @@
 
 ![Project Status : experimental](https://img.shields.io/badge/Project%20status-experimental-orange.svg)
 
-![Branch : master](https://img.shields.io/badge/Branch-master-blue.svg)
+![Branch : release](https://img.shields.io/badge/Branch-release-blue.svg)
 [![version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
 [![npm version](https://badge.fury.io/js/javascript-value-locator.svg)](https://badge.fury.io/js/javascript-value-locator)
 
