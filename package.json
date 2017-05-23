@@ -33,7 +33,8 @@
     "report": "nyc report --reporter=html --reporter=lcov",
     "build": "npm run entries && npm run documentation",
     "dev": "concurrently \"ttab npm run update-coverage\" \"ttab npm run watch-test\" \"ttab npm run watch\" \"ttab npm run dev-server\"",
-    "pre-publish": "npm run build && npm test"
+    "pre-publish": "npm run build && npm test",
+    "release": "git checkout release && npm run build && git commit -a -m"
   },
   "repository": {
     "type": "git",
