@@ -5,8 +5,8 @@
 [![version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
 [![npm version](https://badge.fury.io/js/%40alexistessier%2Fjavascript-value-locator.svg)](https://badge.fury.io/js/%40alexistessier%2Fjavascript-value-locator)
 
-[![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=master)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
-[![Coverage Status](https://coveralls.io/repos/AlexisTessier/javascript-value-locator/badge.svg?branch=master&service=github)](https://coveralls.io/github/AlexisTessier/javascript-value-locator?branch=master)
+[![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=release)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
+[![Coverage Status](https://coveralls.io/repos/AlexisTessier/javascript-value-locator/badge.svg?branch=release&service=github)](https://coveralls.io/github/AlexisTessier/javascript-value-locator?branch=release)
 
 [![Dependency Status](https://david-dm.org/AlexisTessier/javascript-value-locator.svg)](https://david-dm.org/AlexisTessier/javascript-value-locator)
 [![devDependency Status](https://david-dm.org/AlexisTessier/javascript-value-locator/dev-status.svg)](https://david-dm.org/AlexisTessier/javascript-value-locator#info=devDependencies)
