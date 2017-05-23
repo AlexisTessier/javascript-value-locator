@@ -5,7 +5,7 @@ script:
 - npm run pre-publish && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 deploy:
   on:
-    branch: production
+    branch: release
   provider: npm
   email: "YOUR_EMAIL_ADDRESS"
   api_key: "YOUR_API_KEY"
