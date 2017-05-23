@@ -1,4 +1,4 @@
-+ publish on NPM
++ publish on NPM and create a release script
 + fix the more than probable badges issues
 + Open a waffle.io board
 + move next tasks to the waffle board and start using the module in other project to ensure concept validity
