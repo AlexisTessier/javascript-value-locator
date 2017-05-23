@@ -69,8 +69,7 @@
     "nyc": "^10.2.0",
     "read-yaml": "^1.1.0",
     "serve-here": "^3.2.0",
-    "shelljs": "^0.7.7",
-    "ttab": "^0.5.1"
+    "shelljs": "^0.7.7"
   },
   "ava": {
     "source": [
@@ -85,5 +84,8 @@
   },
   "dependencies": {
     "better-assert": "^1.0.2"
+  },
+  "optionalDependencies": {
+    "ttab": "^0.5.1"
   }
 }
