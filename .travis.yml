@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+- '6.9.1'
+script:
+- npm run pre-publish
+deploy:
+  on:
+    branch: production
+  provider: npm
+  email: "YOUR_EMAIL_ADDRESS"
+  api_key: "YOUR_API_KEY"
