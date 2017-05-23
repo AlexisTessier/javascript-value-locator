@@ -60,6 +60,7 @@ module.exports = function load(locator, options = {}, { // eslint-disable-line m
 		locator = parseJVL(locator);
 	}
 
+	/* istanbul ignore else */
 	if (typeof locator === 'object') {
 		assert(typeof locator.target === 'string');
 		target = locator.target;
