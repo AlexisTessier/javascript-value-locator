@@ -2,7 +2,7 @@
 
 ![Project Status : experimental](https://img.shields.io/badge/Project%20status-experimental-orange.svg)
 
-[![version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
+[![version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
 [![npm version](https://badge.fury.io/js/%40alexistessier%2Frjavascript-value-locator.svg)](https://badge.fury.io/js/%40alexistessier%2Frjavascript-value-locator)
 
 Load javascript values from multiples sources and using multiple protocols
@@ -208,7 +208,7 @@ JVL is not aimed to do that.
 
 ## About the documentation
 
-The following documentation was generated using [documentation.js](http://documentation.js.org/) and is also available in a more interactive format [here : url](/index.html)
+The following documentation was generated using [documentation.js](http://documentation.js.org/).
 
 ### Naming conventions
 

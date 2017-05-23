@@ -1,6 +1,6 @@
 {
   "name": "javascript-value-locator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Load javascript values from multiples sources and using multiple protocols",
   "main": "index.js",
   "watch": {

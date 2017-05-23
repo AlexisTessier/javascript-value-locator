@@ -165,7 +165,8 @@
 #- title: Roadmap
 - section: About the documentation
 - p: >
-    The following documentation was generated using [documentation.js](http://documentation.js.org/) and is also available in a more interactive format [here : url](/index.html)
+    The following documentation was generated using [documentation.js](http://documentation.js.org/).
+#and is also available in a more interactive format [here : url](/index.html)
 - title: Naming conventions
 - li: CapitalizedCamelCasedNames are used for [types](https://en.wikipedia.org/wiki/Duck_typing)
 - li: dashified-case-names are used for filenames
