@@ -30,3 +30,7 @@ else{
 	//then
 	shell.exec(`git push origin release`);
 }
+
+shell.exec(`git checkout master`);
+
+assert(git().branch === 'master');
