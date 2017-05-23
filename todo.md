@@ -1,6 +1,4 @@
 + Add some badges to the top of the README
-	+ build status (travis.ci)
-	+ code coverage (coveralls)
 	+ dependencies status (david)
 	+ look for semantic realease
 	+ look for documentation coverage

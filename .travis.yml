@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '6.9.1'
 script:
-- npm run pre-publish
+- npm run pre-publish && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 deploy:
   on:
     branch: production
