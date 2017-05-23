@@ -1,6 +1,8 @@
 language: node_js
 node_js:
 - '6.9.1'
+before_install:
+- npm i -g npm
 script:
 - npm run pre-publish
 deploy:
