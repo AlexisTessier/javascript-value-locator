@@ -7,12 +7,14 @@ const dashify = require('dashify');
 
 const pkg = require('../package.json');
 
+const git = require('git-repo-info')();
+
 /*--------------*/
 
 const view = Object.assign({}, pkg, {
 	formatedName: capitalize.words(pkg.name.replace(/\-/g, ' ')),
-	furyiopath: `%40alexistessier%2Fr${pkg.name}`,
-	content: require('./documentation-introduction.js')
+	content: require('./documentation-introduction.js'),
+	currentBranch: git.branch
 });
 
 /*--------------*/

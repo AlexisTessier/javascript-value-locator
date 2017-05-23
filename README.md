@@ -3,7 +3,9 @@
 ![Project Status : experimental](https://img.shields.io/badge/Project%20status-experimental-orange.svg)
 
 [![version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
-[![npm version](https://badge.fury.io/js/%40alexistessier%2Frjavascript-value-locator.svg)](https://badge.fury.io/js/%40alexistessier%2Frjavascript-value-locator)
+[![npm version](https://badge.fury.io/js/%40alexistessier%2Fjavascript-value-locator.svg)](https://badge.fury.io/js/%40alexistessier%2Fjavascript-value-locator)
+
+[![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=master)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
 
 Load javascript values from multiples sources and using multiple protocols
 

@@ -3,8 +3,10 @@
 
 ![Project Status : experimental](https://img.shields.io/badge/Project%20status-experimental-orange.svg)
 
-[![version](https://img.shields.io/badge/version-{{{version}}}-blue.svg)]({{{ homepage}}})
-[![npm version](https://badge.fury.io/js/{{{furyiopath}}}.svg)](https://badge.fury.io/js/{{{furyiopath}}})
+[![version](https://img.shields.io/badge/version-{{{version}}}-blue.svg)]({{{homepage}}})
+[![npm version](https://badge.fury.io/js/%40{{{author.login.npm}}}%2F{{{name}}}.svg)](https://badge.fury.io/js/%40{{{author.login.npm}}}%2F{{{name}}})
+
+[![Build Status](https://travis-ci.org/{{{author.login.github}}}/{{{name}}}.svg?branch={{{currentBranch}}})](https://travis-ci.org/{{{author.login.github}}}/{{{name}}})
 
 {{description}}
 
