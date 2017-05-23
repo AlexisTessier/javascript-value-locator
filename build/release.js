@@ -9,7 +9,7 @@ const git = require('git-repo-info')();
 
 assert(git.branch === 'release');
 
-if (shell.exec(`git commit -am "Auto-commit : release ${pkg.version}"`).code !== 0) {
+if (shell.exec(`git commit -a -m "Auto-commit : release ${pkg.version}"`).code !== 0) {
 	shell.echo('Error: Git commit failed');
 	shell.exit(1);
 }
