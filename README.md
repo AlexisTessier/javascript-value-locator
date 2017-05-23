@@ -8,6 +8,9 @@
 [![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=master)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
 [![Coverage Status](https://coveralls.io/repos/AlexisTessier/javascript-value-locator/badge.svg?branch=master&service=github)](https://coveralls.io/github/AlexisTessier/javascript-value-locator?branch=master)
 
+[![Dependency Status](https://david-dm.org/AlexisTessier/javascript-value-locator.svg)](https://david-dm.org/AlexisTessier/javascript-value-locator)
+[![devDependency Status](https://david-dm.org/AlexisTessier/javascript-value-locator/dev-status.svg)](https://david-dm.org/AlexisTessier/javascript-value-locator#info=devDependencies)
+
 Load javascript values from multiples sources and using multiple protocols
 
 -   [Introduction](#introduction)

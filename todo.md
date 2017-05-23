@@ -1,15 +1,10 @@
-+ Add some badges to the top of the README
-	+ dependencies status (david)
-	+ look for semantic realease
-	+ look for documentation coverage
 + publish on NPM
 + fix the more than probable badges issues
 + Open a waffle.io board
-+ introduction
-	+ read et correct again
-	+ complete get started
-	+ read et correct again
 + move next tasks to the waffle board and start using the module in other project to ensure concept validity
++ read again and correct the documentation
++ look for semantic realease
++ look for documentation coverage
 + Use pegjs to create a real parser
 + Handle computed terms 
 + Add optional username handling
