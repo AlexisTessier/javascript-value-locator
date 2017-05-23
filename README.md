@@ -6,6 +6,7 @@
 [![npm version](https://badge.fury.io/js/%40alexistessier%2Fjavascript-value-locator.svg)](https://badge.fury.io/js/%40alexistessier%2Fjavascript-value-locator)
 
 [![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=master)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
+[![Coverage Status](https://coveralls.io/repos/AlexisTessier/javascript-value-locator/badge.svg?branch=master&service=github)](https://coveralls.io/github/AlexisTessier/javascript-value-locator?branch=master)
 
 Load javascript values from multiples sources and using multiple protocols
 
