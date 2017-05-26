@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- 6.9.1
+script:
+- npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+deploy:
+  provider: npm
+  email: alexistessierdev@gmail.com
+  api_key:
+    secure: zn5B3/OksfS2pipUipkf35wuo5JTFTUpd+JYK8Kjxrc5yHZtjYmLINt2DlaVFIGCmOk0ASN9/Vw/Ig6230Q329718OTS0brZubpB8S7ZMY+7kHKb5ZKnY0zr8P4Ly4aqxF+aBMsrrR0qTDsKNlWCJ6DFKPBdFQplEjxV6uMSAWsC+f5IZ9ZpF5Dk3hFdp/AsGJYHDbYFMg7oAIlGawzSQXoiMDCguC+t6E53uwwKDpok/f14fOGWK3zEPbuT4p4PwaNauDdMxfkQe6ezDTt6DkkK8G+uIZyLfHrDO9vAVKF0KCJvb91iNW/lWQUarZ6dKCueQzFz1MF2xjRKSiskgrdFas1bRgNpqlxad1kHJBPdrJ31V93lyeDLgt0zxRZxo7anM/GIupquzKfng4+XlO8buvXnV0dcMKnrVhLH0nBkZyzfq/cyPmnu24OiUAR7fkwbFkOyIQ6ZKjm+3pQntuFuKb+YPNigwX/U7E3ewS0NULbVI+6N/tLZDvK4dtn25JehGyF1BFTGS9YNH4gxpgSzTTPRCfSiaoi114vtHfGHxKnf5wufMP2bq83ryLmEWlSSvAkD9bPq42l6KxxrP919gaGjfIYCEiyod+1uiwkOuikyRXnW3JAO9xwQO5ItEPzh78ha+fdqXm7jCBrbEgn74vD4OCySdeqSCkUR+b4=
+  on:
+    repo: AlexisTessier/javascript-value-locator
+    branch: release

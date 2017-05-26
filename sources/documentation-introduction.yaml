@@ -172,5 +172,3 @@
 - li: dashified-case-names are used for filenames
 - li: camelCasedNames are used for methods and properties
 - section: Documentation
-- section: License
-- p: "[MIT](https://opensource.org/licenses/MIT) - [Alexis Tessier](https://github.com/AlexisTessier) - 2017-present"

@@ -1,18 +1,14 @@
 'use strict';
 
-const entries = {
-	'index': 'sources/javascript-value-locator',
-	'load': 'sources/api/load',
-	'set-locator-default-protocol': 'sources/api/set-locator-default-protocol',
-	'parse': 'sources/api/parse',
-	'stringify': 'sources/api/stringify',
-	'default-protocols': 'sources/api/default-protocols'
-}
+const path = require('path');
+
+const readYaml = require('read-yaml');
+
+const entries = readYaml.sync(path.join(__dirname, `../sources/entries.yaml`), {encoding: 'utf-8'});
 
 /*--------------*/
 
 const fs = require('fs');
-const path = require('path');
 const mustache = require('mustache');
 
 const template = fs.readFileSync(path.join(__dirname, 'entry.tpl.js'), {

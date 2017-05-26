@@ -18,6 +18,7 @@
 {{#menu}}
 + [{{{label}}}](#{{{anchor}}})
 {{/menu}}
++ [License](#license)
 
 {{#content}}
 
@@ -54,3 +55,8 @@
 {{/js}}
 
 {{/content}}
+
+## License
+
+{{{name}}} is released under [{{{license}}}]({{{licenseUrl}}}). 
+Copyright (c) {{{licenseDate}}} [{{{author.name}}}]({{{author.github}}})

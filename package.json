@@ -1,18 +1,10 @@
 {
   "name": "javascript-value-locator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Load javascript values from multiples sources and using multiple protocols",
   "main": "index.js",
-  "watch": {
-    "lint": "./sources",
-    "build": {
-      "patterns": [
-        "package.json",
-        "./sources",
-        "./build"
-      ],
-      "extensions": "js,yaml,md,json"
-    }
+  "directories": {
+    "test": "tests"
   },
   "scripts": {
     "lint": "eslint --ext js ./sources",
@@ -40,12 +32,13 @@
     "url": "git+https://github.com/AlexisTessier/javascript-value-locator.git"
   },
   "keywords": [
-    "node",
-    "module",
+    "javascript",
+    "value",
     "locator",
-    "config",
+    "JVL",
+    "require",
     "async",
-    "require"
+    "config"
   ],
   "author": {
     "name": "Alexis Tessier",
@@ -58,8 +51,24 @@
     }
   },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexisTessier/javascript-value-locator/issues"
+  },
   "homepage": "https://github.com/AlexisTessier/javascript-value-locator#readme",
+  "watch": {
+    "lint": "./sources",
+    "build": {
+      "patterns": [
+        "package.json",
+        "./sources",
+        "./build"
+      ],
+      "extensions": "js,yaml,md,json"
+    }
+  },
+  "licenseDate": "2017-present",
   "devDependencies": {
+    "@alexistessier/es-lint-config": "^1.0.4",
     "ava": "^0.18.2",
     "capitalize": "^1.0.0",
     "concurrently": "^3.4.0",
@@ -77,6 +86,7 @@
     "mustache": "^2.3.0",
     "npm-watch": "^0.1.8",
     "nyc": "^10.2.0",
+    "oss-license-name-to-url": "^1.2.1",
     "read-yaml": "^1.1.0",
     "serve-here": "^3.2.0",
     "shelljs": "^0.7.7"
