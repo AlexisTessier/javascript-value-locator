@@ -3,7 +3,7 @@
 ![Project Status : experimental](https://img.shields.io/badge/Project%20status-experimental-orange.svg)
 
 ![Branch : master](https://img.shields.io/badge/Branch-master-blue.svg)
-[![version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
+[![version](https://img.shields.io/badge/version-1.0.2-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
 [![npm version](https://badge.fury.io/js/javascript-value-locator.svg)](https://badge.fury.io/js/javascript-value-locator)
 
 [![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=master)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
@@ -14,218 +14,24 @@
 
 Load javascript values from multiples sources and using multiple protocols
 
--   [Introduction](#introduction)
--   [Purpose and use cases](#purpose-and-use-cases)
--   [Get started](#get-started)
--   [About the documentation](#about-the-documentation)
+-   [Section Name](#section-name)
 -   [Documentation](#documentation)
--   [License](#license)
 
-## Introduction
+## Section Name
 
-This module provide a minimalist api to load (**asynchronously only**) javascript values from different sources, using **javascript value locators** - **_JVL_**. A **_JVL_** is an object or a string (matching a specific format), which represent a way to load a javascript value. It's composed both of a **protocol** and a **target**.
+### Title
 
-```javascript
-// this is a jvl object
-{
-    protocol: 'protocol-name',
-    target: 'full/path/to/module/exporting/the/targeted/value'
-}
+#### Subtitle
 
-// this is the equivalent jvl string
-'protocol-name:full/path/to/module/exporting/the/targeted/value'
-```
-
-You can see this module as a kind of [webpack](https://webpack.js.org/) at the run time, where protocols are loaders, and where instead of doing this :
+paragraph content
 
 ```javascript
-require.ensure([], require => {
-    const value = require('module/path');
-
-    // do something with the value
-})
+// javascript code
 ```
 
-You do this : <a name="introduction-examples"></a>
+    // cli code
 
-```javascript
-const jvl = require('javascript-value-locator');
-
-jvl.load('require:module/path').then(value => {
-    // do something with the value
-})
-```
-
-And for example, if you want to load a yaml, you could use a specific protocol, as you would have used a yaml-loader in webpack
-
-```javascript
-const jvl = require('javascript-value-locator');
-
-/**
- * Assuming that a "require-yaml" protocol was defined in the first place
- * (which is currently not the case)
- */
-jvl.load('require-yaml:module/path.yaml').then(value => {
-    // do something with the value
-})
-```
-
-**_Note that the comparison with webpack is only here for explanatory purpose, this module doesn't aim the same use cases._**
-
-## Purpose and use cases
-
-The [previous examples](#introduction-examples) are here only for the sake of explaining the module basic usage. If you want to require a module in node.js, you should more than probably just do a require (unless you want to load it asynchronously).
-**_The following use case is the one for what the module was created in the first place_**.
-
--   Use the JVL string format to "require" a module in a cli command option
-
-Assuming you want to provide a command with an option which can be a javascript value. If the option is a number, it's ok to do that :
-
-    cli command input --javascript-value-option=5
-
-But if the option is a complex/dynamic object, using JVL allow you to do that :
-
-    cli command input --javascript-value-option=require:full/path/to/module
-
-The cli users have in that way a more fine control over the module he wants use to do some task.
-A logger module is a good example. Imagine you implement a cli command which only log the input, you could have something like : <a name="custom-protocols-example"></a>
-
-```javascript
-// ./load-override.js
-// create a custom load function
-
-const path = require('path');
-const {load, setLocatorDefaultProtocol, defaultProtocols} = require('javascript-value-locator');
-
-module.exports = function customLoad(locator, options){
-    // if the locator is an object and doesn't have protocol property, 
-    // or if it's a string without protocol ahead, the 'custom-protocol' will be used
-
-    return load(setLocatorDefaultProtocol(locator, 'custom-protocol'), options, {
-        protocols: Object.assign({}, defaultProtocols, {
-            ['custom-protocol'](resolve, reject, target){
-                
-                // define a way to "require" the javascript value targeted
-                // for instance, require the path from a custom directory
-                // It will allow to provide some built-in log functions
-
-                defaultProtocols.require(resolve, reject,
-                    path.join(__dirname, '../custom/directory/path', target)
-                );
-            }
-        })
-    })
-}
-```
-
-```javascript
-// ./log-command.js
-// then use the custom load function in your log command implementation
-
-const load = require('./load-override');
-
-module.exports = async function logCommand(
-    input,
-    log = (...logs) => console.log(...logs) // provide a default logger
-){
-    // enable silent mode
-    if(log === false){
-        log = ()=>{};
-    }
-
-    // enable the user to directly use a function as log option
-    if(typeof log !== 'function'){
-        log = await load(log);
-    }
-
-    assert(typeof log === 'function');
-
-    return log(input);
-}
-```
-
-Make the cli implementation which will call this async function, then your users can do :
-
--   this will use a simple console.log
-
-
-    cli log "hello world"
-
--   this will not log anything
-
-
-    cli log "hello world" --log=false
-
--   this will use a built-in logger defined in custom/directory/path
-
-
-    cli log "hello world" --log=custom-protocol:log-one
-
--   this will use an other built-in logger defined in custom/directory/path
-
-
-    cli log "hello world" --log=log-two
-
--   this will use a logger defined by the user
-
-
-    cli log "hello world" --log=require:path/to/a/custom/logger
-
-#### Speculative use cases
-
-The module wasn't thinked in order to do that, but it may could be used to accomplish some of these things :
-
--   Create and use some custom protocols able to load javascript from the cloud
-
-
--   Use in the browser to load assets (still with custom protocols)
-
-
--   And probably more...
-
-## Get started
-
-### Install
-
--   using npm
-
-
-    npm install --save javascript-value-locator
-
--   or using yarn
-
-
-    yarn add javascript-value-locator
-
-### Load one or more values from JVL
-
-TO DO - [see the load function documentation for now](#load)
-
-### Available protocols
-
-Currently, the only implemented protocol is the [require](#require). If needed, [add others](#use-custom-protocols) and eventually open a issue or event better, a PR.
-
-### Use custom protocols
-
-You can use the inject.protocols option of the [load function](#load). [Look here for concrete example](#custom-protocols-example).
-
-### Load a value synchronously
-
-JVL is not aimed to do that.
-
-## About the documentation
-
-The following documentation was generated using [documentation.js](http://documentation.js.org/).
-
-### Naming conventions
-
--   CapitalizedCamelCasedNames are used for [types](https://en.wikipedia.org/wiki/Duck_typing)
-
-
--   dashified-case-names are used for filenames
-
-
--   camelCasedNames are used for methods and properties
+-   list element
 
 ## Documentation
 
@@ -392,4 +198,5 @@ This function is a [JavascriptValueLocatorProtocol](#javascriptvaluelocatorproto
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT) - [Alexis Tessier](https://github.com/AlexisTessier) - 2017-present
+javascript-value-locator is released under [MIT](http://opensource.org/licenses/MIT). 
+Copyright (c) 2017-present [Alexis Tessier](https://github.com/AlexisTessier)

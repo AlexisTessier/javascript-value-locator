@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const licenseUrl = require("oss-license-name-to-url");
 
 const capitalize = require('capitalize');
 const dashify = require('dashify');
@@ -14,7 +15,8 @@ const git = require('git-repo-info')();
 const view = Object.assign({}, pkg, {
 	formatedName: capitalize.words(pkg.name.replace(/\-/g, ' ')),
 	content: require('./documentation-introduction.js'),
-	currentBranch: git.branch
+	currentBranch: git.branch,
+	licenseUrl : licenseUrl(pkg.license)
 });
 
 /*--------------*/
