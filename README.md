@@ -2,13 +2,8 @@
 
 ![Project Status : experimental](https://img.shields.io/badge/Project%20status-experimental-orange.svg)
 
-<<<<<<< HEAD
 ![Branch : release](https://img.shields.io/badge/Branch-release-blue.svg)
-[![version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
-=======
-![Branch : master](https://img.shields.io/badge/Branch-master-blue.svg)
 [![version](https://img.shields.io/badge/version-1.0.2-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
->>>>>>> master
 [![npm version](https://badge.fury.io/js/javascript-value-locator.svg)](https://badge.fury.io/js/javascript-value-locator)
 
 [![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=release)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
