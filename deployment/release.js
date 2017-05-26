@@ -11,7 +11,7 @@ shell.exec(`git checkout release`);
 
 assert(git().branch === 'release');
 
-if (shell.exec(`git merge master`).code !== 0) {
+if (shell.exec(`git merge -s ours master`).code !== 0) {
 	shell.echo('Error: Release failed at merge master step');
 	shell.exit(1);
 }
