@@ -7,6 +7,12 @@ const shell = require('shelljs');
 const pkg = require('../package.json');
 const git = require('git-repo-info');
 
+shell.exec(`git checkout master`);
+
+assert(git().branch === 'master');
+
+shell.exec(`git merge release && git push origin master`);
+
 shell.exec(`git checkout release`);
 
 assert(git().branch === 'release');
