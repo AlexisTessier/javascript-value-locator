@@ -18,6 +18,7 @@
 {{#menu}}
 + [{{{label}}}](#{{{anchor}}})
 {{/menu}}
++ [License](#license)
 
 {{#content}}
 
