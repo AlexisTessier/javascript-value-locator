@@ -2,12 +2,12 @@
 
 ![Project Status : experimental](https://img.shields.io/badge/Project%20status-experimental-orange.svg)
 
-![Branch : release](https://img.shields.io/badge/Branch-release-blue.svg)
-[![version](https://img.shields.io/badge/version-1.0.3-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
+![Branch : master](https://img.shields.io/badge/Branch-master-blue.svg)
+[![version](https://img.shields.io/badge/version-1.0.5-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
 [![npm version](https://badge.fury.io/js/javascript-value-locator.svg)](https://badge.fury.io/js/javascript-value-locator)
 
-[![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=release)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
-[![Coverage Status](https://coveralls.io/repos/AlexisTessier/javascript-value-locator/badge.svg?branch=release&service=github)](https://coveralls.io/github/AlexisTessier/javascript-value-locator?branch=release)
+[![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=master)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
+[![Coverage Status](https://coveralls.io/repos/AlexisTessier/javascript-value-locator/badge.svg?branch=master&service=github)](https://coveralls.io/github/AlexisTessier/javascript-value-locator?branch=master)
 
 [![Dependency Status](https://david-dm.org/AlexisTessier/javascript-value-locator.svg)](https://david-dm.org/AlexisTessier/javascript-value-locator)
 [![devDependency Status](https://david-dm.org/AlexisTessier/javascript-value-locator/dev-status.svg)](https://david-dm.org/AlexisTessier/javascript-value-locator#info=devDependencies)
