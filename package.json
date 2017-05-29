@@ -1,11 +1,12 @@
 {
   "name": "javascript-value-locator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Load javascript values from multiples sources and using multiple protocols",
   "main": "index.js",
   "directories": {
     "test": "tests"
   },
+  "status": "experimental",
   "scripts": {
     "lint": "eslint --ext js ./sources",
     "watch": "npm-watch",
