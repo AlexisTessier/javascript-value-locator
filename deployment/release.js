@@ -11,7 +11,25 @@ shell.exec(`git checkout master`);
 
 assert(git().branch === 'master');
 
-shell.exec(`git merge release && git push origin master`);
+if (shell.exec(`git merge release`).code !== 0) {
+	shell.echo('Error: Release failed at merge release to master step');
+	shell.exit(1);
+}
+else if (shell.exec(`npm run build`).code !== 0) {
+	shell.echo('Error: Release build failed on master');
+	shell.exit(1);
+}
+else if(shell.exec(`npm test`).code !== 0) {
+	shell.echo('Error: Release Tests failed on master');
+	shell.exit(1);
+}
+else{
+	//add the generated files which are different depending on the branch (like README.md)
+	shell.exec(`git add . && git commit -a -m "Auto-commit : pre-release ${pkg.version}"`);
+
+	//then
+	shell.exec(`git push origin master`);
+}
 
 shell.exec(`git checkout release`);
 
