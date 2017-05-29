@@ -6,6 +6,7 @@
   "directories": {
     "test": "tests"
   },
+  "status": "experimental",
   "scripts": {
     "lint": "eslint --ext js ./sources",
     "watch": "npm-watch",
