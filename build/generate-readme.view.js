@@ -16,7 +16,7 @@ const view = Object.assign({}, pkg, {
 	formatedName: capitalize.words(pkg.name.replace(/\-/g, ' ')),
 	content: require('./documentation-introduction.js'),
 	currentBranch: git.branch,
-	licenseUrl : licenseUrl(pkg.license)
+	licenseUrl: licenseUrl(pkg.license)
 });
 
 /*--------------*/
