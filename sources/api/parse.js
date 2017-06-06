@@ -5,7 +5,7 @@ const assert = require('better-assert');
 const JVLStringProtocolTargetSeparator = require('../settings').JVLStringProtocolTargetSeparator;
 
 /**
- * This function returns a locator object from a JVL string
+ * This function returns a locator object from a JVL string.
  *
  * @param {JavascriptValueLocatorString} JVL - The locator as string to parse.
  *

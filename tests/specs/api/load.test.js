@@ -360,11 +360,77 @@ test('load using predefined protocol - require', t => {
 	});
 })
 
+test('load using predefined protocol - require using relative path', t => {
+	const load = requireFromIndex('sources/api/load');
+	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
+
+	const loadPromise = load({
+		protocol: 'require',
+		target: 'tests/mocks/fake-module.js'
+	});
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(moduleContent => {
+		assert.equal(moduleContent, expectedModule);
+		t.pass();
+	});
+})
+
+test('load using predefined protocol - require using relative path and custom cwd', t => {
+	const load = requireFromIndex('sources/api/load');
+	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
+
+	const loadPromise = load({
+		protocol: 'require',
+		target: 'fake-module.js'
+	}, {cwd: pathFromIndex('tests/mocks')});
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(moduleContent => {
+		assert.equal(moduleContent, expectedModule);
+		t.pass();
+	});
+})
+
 test('load using jol format - require', t => {
 	const load = requireFromIndex('sources/api/load');
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
 
 	const loadPromise = load(`require:${pathFromIndex('tests/mocks/fake-module.js')}`);
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(moduleContent => {
+		assert.equal(moduleContent, expectedModule);
+		t.pass();
+	});
+});
+
+test('load using jol format - require using relative path', t => {
+	const load = requireFromIndex('sources/api/load');
+	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
+
+	const loadPromise = load(`require:tests/mocks/fake-module.js`);
+
+	assert(loadPromise instanceof Promise);
+
+	t.plan(1);
+	return loadPromise.then(moduleContent => {
+		assert.equal(moduleContent, expectedModule);
+		t.pass();
+	});
+});
+
+test('load using jol format - require using relative path and custom cwd', t => {
+	const load = requireFromIndex('sources/api/load');
+	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
+
+	const loadPromise = load(`require:fake-module.js`, {cwd : pathFromIndex('tests/mocks')});
 
 	assert(loadPromise instanceof Promise);
 

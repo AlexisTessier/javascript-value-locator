@@ -3,7 +3,7 @@
 [![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
 
 ![Branch : master](https://img.shields.io/badge/Branch-master-blue.svg)
-[![version](https://img.shields.io/badge/version-1.0.9-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
+[![version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
 [![npm version](https://badge.fury.io/js/javascript-value-locator.svg)](https://badge.fury.io/js/javascript-value-locator)
 
 [![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=master)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
@@ -319,18 +319,18 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### setLocatorDefaultProtocol
 
-This function returns a locator with the specified default protocol if the input locator doesn't provide one
+This function returns a locator with the specified default protocol if the input locator doesn't provide one.
 
 **Parameters**
 
--   `locator` **(([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)) | [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object))>)** A potential JVL which must at least provide a target. It will be transformed in a valid JVL. If it's an Array, the function will return an Array of valid JVL. The output JVl will keep the type of the original input locator
+-   `locator` **(([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)) | [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;([string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object))>)** A potential JVL which must at least provide a target. It will be transformed in a valid JVL. If it's an Array, the function will return an Array of valid JVL. The output JVl will keep the type of the original input locator.
 -   `defaultProtocol` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** If no protocol is found in the locator, then the default protocol will be setted as the current locator protocol. Note that you can't provide a protocol as a function using the setLocatorDefaultProtocol function.
 
 Returns **([JavascriptValueLocator](#javascriptvaluelocator) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[JavascriptValueLocator](#javascriptvaluelocator)>)** The corresponding locator as an object.
 
 ### parse
 
-This function returns a locator object from a JVL string
+This function returns a locator object from a JVL string.
 
 **Parameters**
 
@@ -340,7 +340,7 @@ Returns **[JavascriptValueLocatorObject](#javascriptvaluelocatorobject)** The co
 
 ### stringify
 
-This function transforms a locator object to a JVL string
+This function transforms a locator object to a JVL string.
 
 **Parameters**
 
@@ -382,13 +382,15 @@ module.exports = function customLoad(locator, options){
 
 ### require
 
-This function is a [JavascriptValueLocatorProtocol](#javascriptvaluelocatorprotocol) that use the node require function to load the target
+This function is a [JavascriptValueLocatorProtocol](#javascriptvaluelocatorprotocol) that use the node require function to load the target.
 
 **Parameters**
 
--   `resolve` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A resolve function which will be called with the targeted javascript value as single argument
--   `reject` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A reject function which will be called with a error as single argument if the javascript value load failed
+-   `resolve` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A resolve function which will be called with the targeted javascript value as single argument.
+-   `reject` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** A reject function which will be called with a error as single argument if the javascript value load failed.
 -   `target` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The target to load and resolve. It must be a path to a valid node module.
+-   `options` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** A javascript object containing the require protocol options. (optional, default `{}`)
+    -   `options.cwd` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The current working directory to use if the target path is not absolute. (optional, default `process.cwd()`)
 
 ## License
 

@@ -25,6 +25,32 @@ test('require valid target', t => {
 	assert.equal(resolvedTarget, expectedtarget);
 });
 
+test('require valid target using a non absolute path', t => {
+	const requireProtocol = requireFromIndex('sources/protocols/require');
+
+	const expectedtarget = requireFromIndex('tests/mocks/fake-module');
+
+	let resolvedTarget = null;
+	let rejectedError = null;
+	requireProtocol(target => resolvedTarget = target, err => rejectedError = err, 'tests/mocks/fake-module');
+
+	assert.equal(rejectedError, null);
+	assert.equal(resolvedTarget, expectedtarget);
+});
+
+test('require valid target using a non absolute path and a custom cwd', t => {
+	const requireProtocol = requireFromIndex('sources/protocols/require');
+
+	const expectedtarget = requireFromIndex('tests/mocks/fake-module');
+
+	let resolvedTarget = null;
+	let rejectedError = null;
+	requireProtocol(target => resolvedTarget = target, err => rejectedError = err, 'fake-module', {cwd: pathFromIndex('tests/mocks')});
+
+	assert.equal(rejectedError, null);
+	assert.equal(resolvedTarget, expectedtarget);
+});
+
 test('require unvalid target', t => {
 	const requireProtocol = requireFromIndex('sources/protocols/require');
 
@@ -64,5 +90,4 @@ test('call with wrong resolve, reject or target types', t => {
 			});
 		});
 	});
-
 });
