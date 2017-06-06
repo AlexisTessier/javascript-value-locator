@@ -14,9 +14,9 @@ const UNDEFINED_MODULE = Symbol();
  * @param {object} [options=] - A javascript object containing the require protocol options.
  * @param {string} [options.cwd=process.cwd()] - The current working directory to use if the target path is not absolute.
  */
-module.exports = function requireProtocol(resolve, reject, target, {
+module.exports = function requireProtocol(resolve, reject, target, { // eslint-disable-line max-params
 	cwd = process.cwd()
-} = {}) { // eslint-disable-line max-params
+} = {}) {
 	assert(typeof resolve === 'function');
 	assert(typeof reject === 'function');
 	assert(typeof target === 'string');
