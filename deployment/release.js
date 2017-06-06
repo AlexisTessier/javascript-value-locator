@@ -81,10 +81,6 @@ function confirmRelease(releaseType, releaseDescription) {
 		shell.echo('Error: Release failed at pre-release commit');
 		shell.exit(1);
 	}
-	if(shell.exec(`git tag -a v${pkg.version} -m "${releaseDescription}"`).code !== 0) {
-		shell.echo('Error: Setting the version tag');
-		shell.exit(1);
-	}
 	else if(shell.exec(`git push origin master`).code !== 0) {
 		shell.echo('Error: Release failed at push on master');
 		shell.exit(1);
