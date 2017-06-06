@@ -3,7 +3,7 @@
 [![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
 
 ![Branch : master](https://img.shields.io/badge/Branch-master-blue.svg)
-[![version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
+[![version](https://img.shields.io/badge/version-1.1.1-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
 [![npm version](https://badge.fury.io/js/javascript-value-locator.svg)](https://badge.fury.io/js/javascript-value-locator)
 
 [![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=master)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
