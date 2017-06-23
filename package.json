@@ -6,7 +6,6 @@
   "directories": {
     "test": "tests"
   },
-  "stability": "unstable",
   "scripts": {
     "lint": "eslint --ext js ./sources",
     "watch": "npm-watch",
@@ -71,7 +70,7 @@
   "licenseDate": "2017-present",
   "devDependencies": {
     "@alexistessier/es-lint-config": "^1.1.0",
-    "@alexistessier/node-module-starterkit-release-dep": "^1.0.4",
+    "@alexistessier/node-module-starterkit-release-dep": "^1.0.5",
     "ava": "^0.18.2",
     "capitalize": "^1.0.0",
     "concurrently": "^3.5.0",
@@ -83,7 +82,6 @@
     "git-repo-info": "^1.4.1",
     "github-markdown-css": "^2.8.0",
     "glob": "^7.1.1",
-    "inquirer": "^3.1.1",
     "jsonfile": "^3.0.0",
     "marked": "^0.3.6",
     "mkdirp": "^0.5.1",
@@ -99,7 +97,7 @@
     "source": [
       "sources/**/*.js"
     ],
-    "timeout": 30000
+    "timeout": 5000
   },
   "nyc": {
     "exclude": [
@@ -111,6 +109,6 @@
     "better-assert": "^1.0.2"
   },
   "optionalDependencies": {
-    "ttab": "^0.5.1"
+    "ttab": "^0.6.0"
   }
 }
