@@ -98,7 +98,7 @@
     "source": [
       "sources/**/*.js"
     ],
-    "timeout": 5000
+    "timeout": 30000
   },
   "nyc": {
     "exclude": [
