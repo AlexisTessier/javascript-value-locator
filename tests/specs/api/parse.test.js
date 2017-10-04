@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('assert');
 const test = require('ava');
 
 const requireFromIndex = require('../../utils/require-from-index');
@@ -9,8 +8,8 @@ test('type of parse', t => {
 	const parse = requireFromIndex('sources/api/parse');
 	const parseFromIndex = requireFromIndex('parse');
 
-	assert.equal(typeof parse, 'function');
-	assert.equal(parseFromIndex, parse);
+	t.is(typeof parse, 'function');
+	t.is(parseFromIndex, parse);
 });
 
 test('parse JVL string', t => {
@@ -18,21 +17,21 @@ test('parse JVL string', t => {
 
 	const locator = parse('fake-protocol:fake-target');
 
-	assert.equal(typeof locator, 'object');
-	assert.equal(typeof locator.protocol, 'string');
-	assert.equal(locator.protocol, 'fake-protocol');
-	assert.equal(typeof locator.target, 'string');
-	assert.equal(locator.target, 'fake-target');
-	assert.equal(Object.keys(locator).length, 2);
+	t.is(typeof locator, 'object');
+	t.is(typeof locator.protocol, 'string');
+	t.is(locator.protocol, 'fake-protocol');
+	t.is(typeof locator.target, 'string');
+	t.is(locator.target, 'fake-target');
+	t.is(Object.keys(locator).length, 2);
 
 	const l = parse('p:t');
 
-	assert.equal(typeof l, 'object');
-	assert.equal(typeof l.protocol, 'string');
-	assert.equal(l.protocol, 'p');
-	assert.equal(typeof l.target, 'string');
-	assert.equal(l.target, 't');
-	assert.equal(Object.keys(l).length, 2);
+	t.is(typeof l, 'object');
+	t.is(typeof l.protocol, 'string');
+	t.is(l.protocol, 'p');
+	t.is(typeof l.target, 'string');
+	t.is(l.target, 't');
+	t.is(Object.keys(l).length, 2);
 });
 
 test('parse unvalid JVL string', t => {

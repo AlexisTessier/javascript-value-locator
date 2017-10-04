@@ -5,6 +5,10 @@ const assert = require('better-assert');
 const parseJVL = require('./parse');
 const defaultProtocols = require('./default-protocols');
 
+function msg(...str) {
+	return str.map(s => s.trim()).join(' ');
+}
+
 /**
  * This function loads a javascript value in a async way
  *
@@ -25,9 +29,11 @@ module.exports = function load(locator, options = {}, { // eslint-disable-line m
 	if (Array.isArray(locator)) {
 		const optionsObjectsArray = Array.isArray(options);
 		if (optionsObjectsArray && options.length !== locator.length) {
-			throw new Error(
-`When using the Javascript Value Locator load function with an Array of locators and an Array of options objects, the two Arrays must contains the same number of elements.`
-			)
+			throw new Error(msg(
+				`When using the Javascript Value Locator load`,
+				`function with an Array of locators and an Array of options objects,`,
+				`the two Arrays must contains the same number of elements.`
+			));
 		}
 
 		return new Promise((resolve, reject) => {
@@ -73,18 +79,29 @@ module.exports = function load(locator, options = {}, { // eslint-disable-line m
 			case 'string':
 				if (!(locator.protocol in protocols)) {
 					const protocolsNames = Object.keys(protocols);
-					throw new Error(`"${locator.protocol}" is not a defined protocol. Existing protocol${protocolsNames.length > 1 ? "s are" : " is"} ${protocolsNames.map(name => '"'+name+'"').join(', ')}`);
+					throw new Error(msg(
+						`"${locator.protocol}" is not a defined protocol.`,
+						`Existing protocol${protocolsNames.length > 1 ? "s are" : " is"}`,
+						`${protocolsNames.map(name => '"'+name+'"').join(', ')}` // eslint-disable-line prefer-template
+					));
 				}
 
 				protocol = protocols[locator.protocol];
 
 				if (typeof protocol !== 'function') {
-					throw new Error(`"${locator.protocol}" is of type "${typeof locator.protocol}" and is not a valid protocol. A valid protocol must be a function`);
+					throw new Error(msg(
+						`"${locator.protocol}" is of type "${typeof locator.protocol}" and`,
+						`is not a valid protocol. A valid protocol must be a function`
+					));
 				}
 				break;
 
 			default:
-				throw new TypeError(`${typeof locator.protocol} is not a valid type for a locator.protocol. Valid types are function or string`);
+				throw new TypeError(msg(
+					`${typeof locator.protocol} is not`,
+					`a valid type for a locator.protocol.`,
+					`Valid types are function or string`
+				));
 		}
 	}
 

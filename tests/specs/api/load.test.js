@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('assert');
 const test = require('ava');
 
 const path = require('path');
@@ -12,12 +11,14 @@ test('type of load', t => {
 	const load = requireFromIndex('sources/api/load');
 	const loadFromIndex = requireFromIndex('load');
 
-	assert.equal(typeof load, 'function');
-	assert.equal(loadFromIndex, load);
+	t.is(typeof load, 'function');
+	t.is(loadFromIndex, load);
 })
 
 test('load using locator object', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(3);
 
 	const loadPromise = load({
 		protocol(resolve, reject, moduleName) {
@@ -26,17 +27,18 @@ test('load using locator object', t => {
 		target: 'fake-module'
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, `fake-protocol--fake-module`);
+		t.is(moduleContent, `fake-protocol--fake-module`);
 		t.pass();
 	});
 })
 
 test('protocol rejection', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(3);
 
 	const loadPromise = load({
 		protocol(resolve, reject, moduleName) {
@@ -45,17 +47,18 @@ test('protocol rejection', t => {
 		target: 'fake-module'
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.catch(err => {
-		assert.equal(err.message, `fake-protocol--fake-module error`);
+		t.is(err.message, `fake-protocol--fake-module error`);
 		t.pass();
 	});
 })
 
 test('load using protocol name', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(3);
 
 	function fakeProtocol(resolve, reject, moduleName) {
 		resolve(`fakeProtocol--${moduleName}`)
@@ -70,17 +73,18 @@ test('load using protocol name', t => {
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, `fakeProtocol--fake-module`);
+		t.is(moduleContent, `fakeProtocol--fake-module`);
 		t.pass();
 	});
 })
 
 test('load using protocol name and protocols list in the locator object', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(3);
 
 	function fakeProtocol(resolve, reject, moduleName) {
 		resolve(`fakeProtocol--${moduleName}`)
@@ -94,17 +98,18 @@ test('load using protocol name and protocols list in the locator object', t => {
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, `fakeProtocol--fake-module`);
+		t.is(moduleContent, `fakeProtocol--fake-module`);
 		t.pass();
 	});
 })
 
 test('check protocols override', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(3);
 
 	function fakeProtocol(resolve, reject, moduleName) {
 		resolve(`fakeProtocol--${moduleName}`)
@@ -124,11 +129,10 @@ test('check protocols override', t => {
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, `fakeProtocol--fake-module`);
+		t.is(moduleContent, `fakeProtocol--fake-module`);
 		t.pass();
 	});
 });
@@ -153,6 +157,8 @@ test('passing a wrong type for protocol throws error', t => {
 test('passing options to a protocol', t => {
 	const load = requireFromIndex('sources/api/load');
 
+	t.plan(3);
+
 	const expectedOptions = {
 		fakeKey: 'fakeValue'
 	};
@@ -166,17 +172,18 @@ test('passing options to a protocol', t => {
 		target: 'fake-module'
 	}, expectedOptions);
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.deepEqual(passedOptions, expectedOptions);
+		t.deepEqual(passedOptions, expectedOptions);
 		t.pass();
 	});
 })
 
 test('passing options to a protocol directly in the locator object', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(3);
 
 	const expectedOptions = {
 		fakeKey: 'fakeValue'
@@ -192,17 +199,18 @@ test('passing options to a protocol directly in the locator object', t => {
 		options: expectedOptions
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.deepEqual(passedOptions, expectedOptions);
+		t.deepEqual(passedOptions, expectedOptions);
 		t.pass();
 	});
 })
 
 test('check options override', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(3);
 
 	const expectedOptions = {
 		fakeKey: 'fakeValue',
@@ -224,11 +232,10 @@ test('check options override', t => {
 		fakeKey2: 'fakeValue2'
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.deepEqual(passedOptions, expectedOptions);
+		t.deepEqual(passedOptions, expectedOptions);
 		t.pass();
 	});
 });
@@ -294,6 +301,8 @@ test('load using unvalid protocol', t => {
 test('load using jol format', t => {
 	const load = requireFromIndex('sources/api/load');
 
+	t.plan(3);
+
 	function fakeProtocol(resolve, reject, moduleName) {
 		resolve(`fakeProtocol--${moduleName}`)
 	}
@@ -304,17 +313,18 @@ test('load using jol format', t => {
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, `fakeProtocol--fake-module`);
+		t.is(moduleContent, `fakeProtocol--fake-module`);
 		t.pass();
 	});
 })
 
 test('load using jol format with options', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(4);
 
 	let passedOptions = null;
 	const expectedOptions = {
@@ -332,18 +342,20 @@ test('load using jol format with options', t => {
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.deepEqual(passedOptions, expectedOptions);
-		assert.equal(moduleContent, `fakeProtocol--fake-module`);
+		t.deepEqual(passedOptions, expectedOptions);
+		t.is(moduleContent, `fakeProtocol--fake-module`);
 		t.pass();
 	});
 })
 
 test('load using predefined protocol - require', t => {
 	const load = requireFromIndex('sources/api/load');
+	
+	t.plan(3);
+
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
 
 	const loadPromise = load({
@@ -351,17 +363,19 @@ test('load using predefined protocol - require', t => {
 		target: pathFromIndex('tests/mocks/fake-module.js')
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, expectedModule);
+		t.is(moduleContent, expectedModule);
 		t.pass();
 	});
 })
 
 test('load using predefined protocol - require using relative path', t => {
 	const load = requireFromIndex('sources/api/load');
+	
+	t.plan(3);
+
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
 
 	const loadPromise = load({
@@ -369,17 +383,19 @@ test('load using predefined protocol - require using relative path', t => {
 		target: 'tests/mocks/fake-module.js'
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, expectedModule);
+		t.is(moduleContent, expectedModule);
 		t.pass();
 	});
 })
 
 test('load using predefined protocol - require using relative path and custom cwd', t => {
 	const load = requireFromIndex('sources/api/load');
+	
+	t.plan(3);
+
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
 
 	const loadPromise = load({
@@ -387,62 +403,69 @@ test('load using predefined protocol - require using relative path and custom cw
 		target: 'fake-module.js'
 	}, {cwd: pathFromIndex('tests/mocks')});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, expectedModule);
+		t.is(moduleContent, expectedModule);
 		t.pass();
 	});
 })
 
 test('load using jol format - require', t => {
 	const load = requireFromIndex('sources/api/load');
+	
+	t.plan(3);
+
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
 
 	const loadPromise = load(`require:${pathFromIndex('tests/mocks/fake-module.js')}`);
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, expectedModule);
+		t.is(moduleContent, expectedModule);
 		t.pass();
 	});
 });
 
 test('load using jol format - require using relative path', t => {
 	const load = requireFromIndex('sources/api/load');
+	
+	t.plan(3);
+
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
 
 	const loadPromise = load(`require:tests/mocks/fake-module.js`);
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, expectedModule);
+		t.is(moduleContent, expectedModule);
 		t.pass();
 	});
 });
 
 test('load using jol format - require using relative path and custom cwd', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(3);
+
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
 
 	const loadPromise = load(`require:fake-module.js`, {cwd : pathFromIndex('tests/mocks')});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(moduleContent => {
-		assert.equal(moduleContent, expectedModule);
+		t.is(moduleContent, expectedModule);
 		t.pass();
 	});
 });
 
 test('load an array of valid locators', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(5);
 
 	const expectedModules = [
 		requireFromIndex('tests/mocks/fake-module.js'),
@@ -459,19 +482,20 @@ test('load an array of valid locators', t => {
 		}
 	]);
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(([moduleContent1, moduleContent2, moduleContent3]) => {
-		assert.equal(moduleContent1, expectedModules[0]);
-		assert.equal(moduleContent2, expectedModules[1]);
-		assert.equal(moduleContent3, expectedModules[2]);
+		t.is(moduleContent1, expectedModules[0]);
+		t.is(moduleContent2, expectedModules[1]);
+		t.is(moduleContent3, expectedModules[2]);
 		t.pass();
 	});
 });
 
 test('load an array of locators with an unique options object', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(11);
 
 	const expectedOptions = {
 		key1: 'value1'
@@ -500,26 +524,25 @@ test('load an array of locators with an unique options object', t => {
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(([value1, value2, value3]) => {
 		const errorMessage = (
 `When loading an array of locators with an unique options object,  
 all the protocols should be called with this unique options object`
 		);
 
-		assert.equal(value1.protocol, 'protocol1');
-		assert.equal(value1.target, 'target1');
-		assert.deepEqual(value1.options, expectedOptions, errorMessage)
+		t.is(value1.protocol, 'protocol1');
+		t.is(value1.target, 'target1');
+		t.deepEqual(value1.options, expectedOptions, errorMessage)
 
-		assert.equal(value2.protocol, 'protocol1');
-		assert.equal(value2.target, 'target2');
-		assert.deepEqual(value2.options, expectedOptions, errorMessage)
+		t.is(value2.protocol, 'protocol1');
+		t.is(value2.target, 'target2');
+		t.deepEqual(value2.options, expectedOptions, errorMessage)
 
-		assert.equal(value3.protocol, 'protocol2');
-		assert.equal(value3.target, 'target3');
-		assert.deepEqual(value3.options, expectedOptions, errorMessage)
+		t.is(value3.protocol, 'protocol2');
+		t.is(value3.target, 'target3');
+		t.deepEqual(value3.options, expectedOptions, errorMessage)
 		
 		t.pass();
 	});
@@ -527,6 +550,8 @@ all the protocols should be called with this unique options object`
 
 test('load an array of locators with an array of options objects', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(11);
 
 	const expectedOptions = [{
 		key1: 'value1'
@@ -559,26 +584,25 @@ test('load an array of locators with an array of options objects', t => {
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(([value1, value2, value3]) => {
 		const errorMessage = (
 `When loading an array of locators with an array of options object,  
 each protocols should be called with this corresponding options object`
 		);
 
-		assert.equal(value1.protocol, 'protocol1');
-		assert.equal(value1.target, 'target1');
-		assert.deepEqual(value1.options, expectedOptions[0], errorMessage)
+		t.is(value1.protocol, 'protocol1');
+		t.is(value1.target, 'target1');
+		t.deepEqual(value1.options, expectedOptions[0], errorMessage)
 
-		assert.equal(value2.protocol, 'protocol1');
-		assert.equal(value2.target, 'target2');
-		assert.deepEqual(value2.options, expectedOptions[1], errorMessage)
+		t.is(value2.protocol, 'protocol1');
+		t.is(value2.target, 'target2');
+		t.deepEqual(value2.options, expectedOptions[1], errorMessage)
 
-		assert.equal(value3.protocol, 'protocol2');
-		assert.equal(value3.target, 'target3');
-		assert.deepEqual(value3.options, expectedOptions[2], errorMessage)
+		t.is(value3.protocol, 'protocol2');
+		t.is(value3.target, 'target3');
+		t.deepEqual(value3.options, expectedOptions[2], errorMessage)
 		
 		t.pass();
 	});
@@ -608,6 +632,8 @@ test('load an array of locators with an array of options objects with a differen
 test('load an array of locators with an array of options objects which also contains explicitly null (or undefined) values', t => {
 	const load = requireFromIndex('sources/api/load');
 
+	t.plan(6);
+
 	const expectedOptionsObject1 = {
 		key1: 'value1'
 	};
@@ -628,22 +654,21 @@ test('load an array of locators with an array of options objects which also cont
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(([value1, value2, value3, value4]) => {
 		const errorMessage = (
 `When loading an array of locators with an array of options object,  
 if null or undefined are explicitly used instead of an options, options must be an empty object`
 		);
 
-		assert.deepEqual(value1, expectedOptionsObject1, errorMessage)
+		t.deepEqual(value1, expectedOptionsObject1, errorMessage)
 
-		assert.deepEqual(value2, {}, errorMessage);
+		t.deepEqual(value2, {}, errorMessage);
 
-		assert.deepEqual(value3, expectedOptionsObject2, errorMessage)
+		t.deepEqual(value3, expectedOptionsObject2, errorMessage)
 
-		assert.deepEqual(value4, {}, errorMessage);
+		t.deepEqual(value4, {}, errorMessage);
 		
 		t.pass();
 	});
@@ -651,6 +676,8 @@ if null or undefined are explicitly used instead of an options, options must be 
 
 test('load an array of locators with an unique options object and some options setted directly in the locator', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(5);
 
 	const expectedOptionsObject1 = {
 		key1: 'value1',
@@ -695,14 +722,13 @@ test('load an array of locators with an unique options object and some options s
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(([value1, value2, value3]) => {
 
-		assert.deepEqual(value1, expectedOptionsObject1);
-		assert.deepEqual(value2, expectedOptionsObject2);
-		assert.deepEqual(value3, expectedOptionsObject3);
+		t.deepEqual(value1, expectedOptionsObject1);
+		t.deepEqual(value2, expectedOptionsObject2);
+		t.deepEqual(value3, expectedOptionsObject3);
 		
 		t.pass();
 	});
@@ -710,6 +736,8 @@ test('load an array of locators with an unique options object and some options s
 
 test('load an array of locators with an array of options objects and some options setted directly in the locator', t => {
 	const load = requireFromIndex('sources/api/load');
+
+	t.plan(5);
 
 	const expectedOptionsObject1 = {
 		key1: 'value1',
@@ -758,14 +786,13 @@ test('load an array of locators with an array of options objects and some option
 		}
 	});
 
-	assert(loadPromise instanceof Promise);
+	t.true(loadPromise instanceof Promise);
 
-	t.plan(1);
 	return loadPromise.then(([value1, value2, value3]) => {
 
-		assert.deepEqual(value1, expectedOptionsObject1);
-		assert.deepEqual(value2, expectedOptionsObject2);
-		assert.deepEqual(value3, expectedOptionsObject3);
+		t.deepEqual(value1, expectedOptionsObject1);
+		t.deepEqual(value2, expectedOptionsObject2);
+		t.deepEqual(value3, expectedOptionsObject3);
 		
 		t.pass();
 	});

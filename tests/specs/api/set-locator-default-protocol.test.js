@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('assert');
 const test = require('ava');
 
 const pathFromIndex = require('../../utils/path-from-index');
@@ -10,8 +9,8 @@ test('type of setLocatorDefaultProtocol', t => {
 	const setLocatorDefaultProtocol = requireFromIndex('sources/api/set-locator-default-protocol');
 	const setLocatorDefaultProtocolFromIndex = requireFromIndex('set-locator-default-protocol');
 
-	assert.equal(typeof setLocatorDefaultProtocol, 'function');
-	assert.equal(setLocatorDefaultProtocolFromIndex, setLocatorDefaultProtocol);
+	t.is(typeof setLocatorDefaultProtocol, 'function');
+	t.is(setLocatorDefaultProtocolFromIndex, setLocatorDefaultProtocol);
 });
 
 test('use with a valid JVL string', t => {
@@ -20,7 +19,7 @@ test('use with a valid JVL string', t => {
 	const input = 'protocol:target'
 	const output = setLocatorDefaultProtocol(input, 'default-protocol');
 
-	assert.equal(output, input);
+	t.is(output, input);
 });
 
 test('use with a missing protocol string', t => {
@@ -29,7 +28,7 @@ test('use with a missing protocol string', t => {
 	const input = 'target'
 	const output = setLocatorDefaultProtocol(input, 'default-protocol');
 
-	assert.equal(output, `default-protocol:${input}`);
+	t.is(output, `default-protocol:${input}`);
 });
 
 test('use with a missing target string', t => {
@@ -52,7 +51,7 @@ test('use with a valid JVL object', t => {
 
 	const output = setLocatorDefaultProtocol(input, 'default-protocol');
 
-	assert.deepEqual(output, input);
+	t.deepEqual(output, input);
 });
 
 test('use with a missing protocol locator object', t => {
@@ -64,7 +63,7 @@ test('use with a missing protocol locator object', t => {
 
 	const output = setLocatorDefaultProtocol(input, 'default-protocol');
 
-	assert.deepEqual(output, {
+	t.deepEqual(output, {
 		protocol: 'default-protocol',
 		target: input.target
 	});
@@ -99,7 +98,7 @@ test('use with an array of missing protocol locators', t => {
 
 	const output = setLocatorDefaultProtocol(input, 'default-protocol');
 
-	assert.deepEqual(output, [
+	t.deepEqual(output, [
 		'defined-protocol:target1',
 		'default-protocol:target2',
 		{

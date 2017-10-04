@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('assert');
 const test = require('ava');
 
 const requireFromIndex = require('../../utils/require-from-index');
@@ -9,10 +8,10 @@ test('default protocols', t => {
 	const defaultProtocols = requireFromIndex('sources/api/default-protocols');
 	const defaultProtocolsFromIndex = requireFromIndex('default-protocols');
 
-	assert.equal(typeof defaultProtocols, 'object');
-	assert(defaultProtocols !== null);
+	t.is(typeof defaultProtocols, 'object');
+	t.true(defaultProtocols !== null);
 
-	assert(Object.is(defaultProtocolsFromIndex, defaultProtocols));
+	t.is(defaultProtocolsFromIndex, defaultProtocols);
 
 	const expectedProtocols = [
 		'require'
@@ -21,12 +20,12 @@ test('default protocols', t => {
 	const protocols = Object.keys(defaultProtocols);
 
 	expectedProtocols.forEach(expectedProtocol => {
-		assert(protocols.includes(expectedProtocol), `Expected default protocol "${expectedProtocol}" is missing`)
+		t.true(protocols.includes(expectedProtocol), `Expected default protocol "${expectedProtocol}" is missing`)
 	});
 
 	protocols.forEach(protocol => {
-		assert(expectedProtocols.includes(protocol), `Unexpected default protocol "${protocol}" founded`)
+		t.true(expectedProtocols.includes(protocol), `Unexpected default protocol "${protocol}" founded`)
 	});
 
-	assert.equal(defaultProtocols.require, requireFromIndex('sources/protocols/require'));
+	t.is(defaultProtocols.require, requireFromIndex('sources/protocols/require'));
 });

@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('assert');
 const test = require('ava');
 
 const requireFromIndex = require('../../utils/require-from-index');
@@ -9,7 +8,7 @@ const pathFromIndex = require('../../utils/path-from-index');
 test('type of require protocol', t => {
 	const requireProtocol = requireFromIndex('sources/protocols/require');
 
-	assert.equal(typeof requireProtocol, 'function');
+	t.is(typeof requireProtocol, 'function');
 });
 
 test('require valid target', t => {
@@ -21,8 +20,8 @@ test('require valid target', t => {
 	let rejectedError = null;
 	requireProtocol(target => resolvedTarget = target, err => rejectedError = err, pathFromIndex('tests/mocks/fake-module'));
 
-	assert.equal(rejectedError, null);
-	assert.equal(resolvedTarget, expectedtarget);
+	t.is(rejectedError, null);
+	t.is(resolvedTarget, expectedtarget);
 });
 
 test('require valid target using a non absolute path', t => {
@@ -34,8 +33,8 @@ test('require valid target using a non absolute path', t => {
 	let rejectedError = null;
 	requireProtocol(target => resolvedTarget = target, err => rejectedError = err, 'tests/mocks/fake-module');
 
-	assert.equal(rejectedError, null);
-	assert.equal(resolvedTarget, expectedtarget);
+	t.is(rejectedError, null);
+	t.is(resolvedTarget, expectedtarget);
 });
 
 test('require valid target using a non absolute path and a custom cwd', t => {
@@ -47,8 +46,8 @@ test('require valid target using a non absolute path and a custom cwd', t => {
 	let rejectedError = null;
 	requireProtocol(target => resolvedTarget = target, err => rejectedError = err, 'fake-module', {cwd: pathFromIndex('tests/mocks')});
 
-	assert.equal(rejectedError, null);
-	assert.equal(resolvedTarget, expectedtarget);
+	t.is(rejectedError, null);
+	t.is(resolvedTarget, expectedtarget);
 });
 
 test('require unvalid target', t => {
@@ -60,10 +59,10 @@ test('require unvalid target', t => {
 	let rejectedError = null;
 	requireProtocol(target => resolvedTarget = target, err => rejectedError = err, wrongModulePath);
 
-	assert.equal(resolvedTarget, null);
-	assert(rejectedError);
-	assert(rejectedError instanceof Error);
-	assert.equal(rejectedError.message, `require protocol is unable to load the module "${wrongModulePath}" (Cannot find module '${wrongModulePath}')`);
+	t.is(resolvedTarget, null);
+	t.not(rejectedError, null);
+	t.true(rejectedError instanceof Error);
+	t.is(rejectedError.message, `require protocol is unable to load the module "${wrongModulePath}" (Cannot find module '${wrongModulePath}')`);
 });
 
 test('call with wrong resolve, reject or target types', t => {

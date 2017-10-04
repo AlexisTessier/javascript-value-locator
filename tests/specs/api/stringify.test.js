@@ -1,6 +1,5 @@
 'use strict';
 
-const assert = require('assert');
 const test = require('ava');
 
 const path = require('path');
@@ -12,8 +11,8 @@ test('type of stringify', t => {
 	const stringify = requireFromIndex('sources/api/stringify');
 	const stringifyFromIndex = requireFromIndex('stringify');
 
-	assert.equal(typeof stringify, 'function');
-	assert.equal(stringifyFromIndex, stringify);
+	t.is(typeof stringify, 'function');
+	t.is(stringifyFromIndex, stringify);
 })
 
 test('stringify an object', t => {
@@ -27,7 +26,7 @@ test('stringify an object', t => {
 
 	const JVLString = stringify(locator);
 
-	assert.equal(JVLString, `fake-protocol${separator}fake-target`);
+	t.is(JVLString, `fake-protocol${separator}fake-target`);
 });
 
 test('stringify an object with not trimed protocol or target', t => {
@@ -41,7 +40,7 @@ test('stringify an object with not trimed protocol or target', t => {
 
 	const JVLString = stringify(locator);
 
-	assert.equal(JVLString, `fake-protocol${separator}fake-target`);
+	t.is(JVLString, `fake-protocol${separator}fake-target`);
 });
 
 test('stringify with an unvalid protocol which contains the separator in is name', t => {
