@@ -2,6 +2,8 @@
 
 const assert = require('better-assert');
 
+const msg = require('@alexistessier/msg');
+
 const JVLStringProtocolTargetSeparator = require('../settings').JVLStringProtocolTargetSeparator;
 
 /**
@@ -17,7 +19,11 @@ module.exports = function parse(JVL) {
 	const separatorIndex = JVL.indexOf(JVLStringProtocolTargetSeparator);
 
 	if (separatorIndex < 0 || JVL.length < (2 + JVLStringProtocolTargetSeparator.length)) {
-		throw new Error(`"${JVL}" is not a valid Javascript Value Locator string. It must contains the seperator sign "${JVLStringProtocolTargetSeparator}" between a protocol name and a target name`);
+		throw new Error(msg(
+			`"${JVL}" is not a valid Javascript Value Locator string.`,
+			`It must contains the seperator sign "${JVLStringProtocolTargetSeparator}"`,
+			`between a protocol name and a target name`
+		));
 	}
 
 	const locator = {
@@ -26,11 +32,17 @@ module.exports = function parse(JVL) {
 	}
 
 	if(locator.protocol.length === 0){
-		throw new Error(`"${JVL}" is not a valid Javascript Value Locator string. The protocol is missing.`);
+		throw new Error(msg(
+			`"${JVL}" is not a valid Javascript Value Locator string.`,
+			`The protocol is missing.`
+		));
 	}
 
 	if(locator.target.length === 0){
-		throw new Error(`"${JVL}" is not a valid Javascript Value Locator string. The target is missing.`);
+		throw new Error(msg(
+			`"${JVL}" is not a valid Javascript Value Locator string.`,
+			`The target is missing.`
+		));
 	}
 
 	return locator;

@@ -2,12 +2,10 @@
 
 const assert = require('better-assert');
 
+const msg = require('@alexistessier/msg');
+
 const parseJVL = require('./parse');
 const defaultProtocols = require('./default-protocols');
-
-function msg(...str) {
-	return str.map(s => s.trim()).join(' ');
-}
 
 /**
  * This function loads a javascript value in a async way

@@ -392,6 +392,8 @@ This function is a [JavascriptValueLocatorProtocol](#javascriptvaluelocatorproto
 -   `options` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** A javascript object containing the require protocol options. (optional, default `{}`)
     -   `options.cwd` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The current working directory to use if the target path is not absolute. (optional, default `process.cwd()`)
 
+Returns **[undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)** 
+
 ## License
 
 javascript-value-locator is released under [MIT](http://opensource.org/licenses/MIT). 
