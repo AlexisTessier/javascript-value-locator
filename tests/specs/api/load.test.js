@@ -142,7 +142,7 @@ test('passing a wrong type for protocol throws error', t => {
 
 	const wrongProtocolTypes = [[], 7, {}, /mock/, false, true];
 
-	wrongProtocolTypes.forEach(wrongProtocolType => { 
+	wrongProtocolTypes.forEach(wrongProtocolType => {
 		const wrongTypeError = t.throws(() => {
 			load({
 				protocol: wrongProtocolType,
@@ -248,15 +248,9 @@ test('load using undefined protocol', t => {
 			protocol: 'undefinedProtocol',
 			target: 'fake-module',
 			protocols: {
-				exisitingProtocol (){
-
-				},
-				exisitingProtocol2 (){
-
-				},
-				exisitingProtocol3 (){
-
-				}
+				exisitingProtocol(){return;},
+				exisitingProtocol2(){return;},
+				exisitingProtocol3(){return;}
 			}
 		}, null, {
 			protocols: null
@@ -270,9 +264,7 @@ test('load using undefined protocol', t => {
 			protocol: 'undefinedProtocol',
 			target: 'fake-module',
 			protocols: {
-				exisitingProtocol (){
-
-				}
+				exisitingProtocol(){return;}
 			}
 		}, null, {
 			protocols: null
@@ -353,7 +345,7 @@ test('load using jol format with options', t => {
 
 test('load using predefined protocol - require', t => {
 	const load = requireFromIndex('sources/api/load');
-	
+
 	t.plan(3);
 
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
@@ -373,7 +365,7 @@ test('load using predefined protocol - require', t => {
 
 test('load using predefined protocol - require using relative path', t => {
 	const load = requireFromIndex('sources/api/load');
-	
+
 	t.plan(3);
 
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
@@ -393,7 +385,7 @@ test('load using predefined protocol - require using relative path', t => {
 
 test('load using predefined protocol - require using relative path and custom cwd', t => {
 	const load = requireFromIndex('sources/api/load');
-	
+
 	t.plan(3);
 
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
@@ -413,7 +405,7 @@ test('load using predefined protocol - require using relative path and custom cw
 
 test('load using jol format - require', t => {
 	const load = requireFromIndex('sources/api/load');
-	
+
 	t.plan(3);
 
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
@@ -430,7 +422,7 @@ test('load using jol format - require', t => {
 
 test('load using jol format - require using relative path', t => {
 	const load = requireFromIndex('sources/api/load');
-	
+
 	t.plan(3);
 
 	const expectedModule = requireFromIndex('tests/mocks/fake-module.js');
@@ -527,10 +519,11 @@ test('load an array of locators with an unique options object', t => {
 	t.true(loadPromise instanceof Promise);
 
 	return loadPromise.then(([value1, value2, value3]) => {
-		const errorMessage = (
-`When loading an array of locators with an unique options object,  
-all the protocols should be called with this unique options object`
-		);
+		const errorMessage = [
+			`When loading an array of locators with an unique`,
+			`options object, all the protocols should be called`,
+			`with this unique options object`
+		].join(' ');
 
 		t.is(value1.protocol, 'protocol1');
 		t.is(value1.target, 'target1');
@@ -543,7 +536,7 @@ all the protocols should be called with this unique options object`
 		t.is(value3.protocol, 'protocol2');
 		t.is(value3.target, 'target3');
 		t.deepEqual(value3.options, expectedOptions, errorMessage)
-		
+
 		t.pass();
 	});
 });
@@ -587,10 +580,11 @@ test('load an array of locators with an array of options objects', t => {
 	t.true(loadPromise instanceof Promise);
 
 	return loadPromise.then(([value1, value2, value3]) => {
-		const errorMessage = (
-`When loading an array of locators with an array of options object,  
-each protocols should be called with this corresponding options object`
-		);
+		const errorMessage = [
+			`When loading an array of locators with an array`,
+			`of options object, each protocols should be called`,
+			`with this corresponding options object`
+		].join(' ');
 
 		t.is(value1.protocol, 'protocol1');
 		t.is(value1.target, 'target1');
@@ -603,7 +597,7 @@ each protocols should be called with this corresponding options object`
 		t.is(value3.protocol, 'protocol2');
 		t.is(value3.target, 'target3');
 		t.deepEqual(value3.options, expectedOptions[2], errorMessage)
-		
+
 		t.pass();
 	});
 });
@@ -657,19 +651,18 @@ test('load an array of locators with an array of options objects which also cont
 	t.true(loadPromise instanceof Promise);
 
 	return loadPromise.then(([value1, value2, value3, value4]) => {
-		const errorMessage = (
-`When loading an array of locators with an array of options object,  
-if null or undefined are explicitly used instead of an options, options must be an empty object`
-		);
+		const errorMessage = [
+			`When loading an array of locators with`,
+			`an array of options object, if null or`,
+			`undefined are explicitly used instead of`,
+			`an options, options must be an empty object`
+		].join(' ');
 
 		t.deepEqual(value1, expectedOptionsObject1, errorMessage)
-
 		t.deepEqual(value2, {}, errorMessage);
-
 		t.deepEqual(value3, expectedOptionsObject2, errorMessage)
-
 		t.deepEqual(value4, {}, errorMessage);
-		
+
 		t.pass();
 	});
 });
@@ -725,11 +718,10 @@ test('load an array of locators with an unique options object and some options s
 	t.true(loadPromise instanceof Promise);
 
 	return loadPromise.then(([value1, value2, value3]) => {
-
 		t.deepEqual(value1, expectedOptionsObject1);
 		t.deepEqual(value2, expectedOptionsObject2);
 		t.deepEqual(value3, expectedOptionsObject3);
-		
+
 		t.pass();
 	});
 });
@@ -789,11 +781,10 @@ test('load an array of locators with an array of options objects and some option
 	t.true(loadPromise instanceof Promise);
 
 	return loadPromise.then(([value1, value2, value3]) => {
-
 		t.deepEqual(value1, expectedOptionsObject1);
 		t.deepEqual(value2, expectedOptionsObject2);
 		t.deepEqual(value3, expectedOptionsObject3);
-		
+
 		t.pass();
 	});
 });

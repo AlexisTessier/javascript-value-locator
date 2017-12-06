@@ -67,15 +67,15 @@ test('require unvalid target', t => {
 
 test('call with wrong resolve, reject or target types', t => {
 	const requireProtocol = requireFromIndex('sources/protocols/require');
-	
-	const validResolve = ()=>{};
-	const validReject = ()=>{};
+
+	const validResolve = ()=>{return;};
+	const validReject = ()=>{return;};
 	const validTarget = pathFromIndex('tests/mocks/fake-module');
 
 	const notFunctions = ['f', 3, null, false, true, [], {}, / /];
 	const resolveParams = [validResolve].concat(notFunctions);
 	const rejectParams = [validReject].concat(notFunctions);
-	const targetParams = [4, ()=>{}, null, false, true, undefined, [], {}, / /, validTarget];
+	const targetParams = [4, ()=>{return;}, null, false, true, undefined, [], {}, / /, validTarget];
 
 	resolveParams.forEach(resolve => {
 		rejectParams.forEach(reject => {
