@@ -2,12 +2,12 @@
 
 [![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
 
-![Branch : release](https://img.shields.io/badge/Branch-release-blue.svg)
-[![version](https://img.shields.io/badge/version-1.4.3-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
+![Branch : master](https://img.shields.io/badge/Branch-master-blue.svg)
+[![version](https://img.shields.io/badge/version-1.4.4-blue.svg)](https://github.com/AlexisTessier/javascript-value-locator#readme)
 [![npm version](https://badge.fury.io/js/javascript-value-locator.svg)](https://badge.fury.io/js/javascript-value-locator)
 
-[![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=release)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
-[![Coverage Status](https://coveralls.io/repos/AlexisTessier/javascript-value-locator/badge.svg?branch=release&service=github)](https://coveralls.io/github/AlexisTessier/javascript-value-locator?branch=release)
+[![Build Status](https://travis-ci.org/AlexisTessier/javascript-value-locator.svg?branch=master)](https://travis-ci.org/AlexisTessier/javascript-value-locator)
+[![Coverage Status](https://coveralls.io/repos/AlexisTessier/javascript-value-locator/badge.svg?branch=master&service=github)](https://coveralls.io/github/AlexisTessier/javascript-value-locator?branch=master)
 
 [![Dependency Status](https://david-dm.org/AlexisTessier/javascript-value-locator.svg)](https://david-dm.org/AlexisTessier/javascript-value-locator)
 [![devDependency Status](https://david-dm.org/AlexisTessier/javascript-value-locator/dev-status.svg)](https://david-dm.org/AlexisTessier/javascript-value-locator#info=devDependencies)
@@ -236,7 +236,7 @@ The following documentation was generated using [documentation.js](http://docume
 A JavascriptValueLocator (JVL) is a [string](#javascriptvaluelocatorstring) or an [object](#javascriptvaluelocatorobject) which describe a way to access to a javascript value.
 It must provide at least:
 
--   [A protocol (JavascriptValueLocatorProtocol)](#javascriptvaluelocatorprotocol) 
+-   [A protocol (JavascriptValueLocatorProtocol)](#javascriptvaluelocatorprotocol)
 -   [A target as a string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 Type: ([JavascriptValueLocatorString](#javascriptvaluelocatorstring) \| [JavascriptValueLocatorObject](#javascriptvaluelocatorobject))
