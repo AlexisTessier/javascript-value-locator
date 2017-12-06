@@ -111,7 +111,7 @@
     ]
   },
   "dependencies": {
-    "@alexistessier/msg": "1.1.1",
+    "@alexistessier/msg": "1.1.2",
     "better-assert": "1.0.2"
   },
   "optionalDependencies": {
